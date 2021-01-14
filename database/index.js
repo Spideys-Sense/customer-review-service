@@ -1,17 +1,8 @@
 const mysql = require('mysql');
-const dbConfig = require('./config');
 const Promise = require('bluebird');
+const Sequelize = require('sequelize');
 
-const connection = mysql.createConnection({
+module.exports = new Sequelize('customer_reviews', 'root', '', {
   host: 'localhost',
-  user: 'root',
-  database: 'customer_reviews'
-});
-
-const db = Promise.promisifyAll(connection, {multiArgs: true});
-
-db.connectAsync()
-  .then(() => console.log('Connected to Customer Reviews database'))
-  .then(() => dbConfig.create(db));
-
-module.exports = db;
+  dialect: 'mysql'
+})
