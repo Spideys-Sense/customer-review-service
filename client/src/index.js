@@ -1,1 +1,4 @@
-console.log('Hello World from your main file!');
+import React from 'react';
+import { render } from 'react-dom';
+
+render(<App/>, document.getElementById('app'));
