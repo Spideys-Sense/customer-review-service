@@ -60,19 +60,20 @@ let createReview = (itemId) => {
 }
 
 //Seeds the database//
-let seed = () => {
+let seed = async () => {
   for (var i = 1; i < 11; i++) {
-    createItem();
+    await createItem();
     for (var j = 1; j < 11; j++) {
-      createReview(i);
+      await createReview(i);
     }
   }
+  Promise.resolve('success');
 }
 
 describe('Database', () => {
   beforeEach(async () => {
-    // await db.drop();
-    await db.sync({force: true});
+    await db.drop();
+    await db.sync();
     // return db.drop()
     //   .then(() => {
     //     return db.sync();
