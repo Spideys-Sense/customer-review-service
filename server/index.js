@@ -6,8 +6,10 @@ const path = require('path');
 
 const PORT = 1111;
 
+//displays client
 app.use(express.static(path.join(__dirname, '../client/public')))
 
+//connects & listens to server on designated port
 app.listen(PORT, () => {
   console.log('Server listening on port: ' + PORT);
 })
