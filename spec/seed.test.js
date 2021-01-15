@@ -72,12 +72,9 @@ let seed = async () => {
 
 describe('Database', () => {
   beforeEach(async () => {
+    //clears tables
     await db.drop();
     await db.sync();
-    // return db.drop()
-    //   .then(() => {
-    //     return db.sync();
-    //   })
   });
 
   it('should insert 10 rows to items table', async () => {
