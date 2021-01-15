@@ -74,7 +74,7 @@ DATABASE SEEDING TESTING
 ********************* */
 describe('Database', () => {
   beforeEach(async () => {
-    // clears tables
+    // Clears tables
     await db.drop();
     await db.sync();
   });

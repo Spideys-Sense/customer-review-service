@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 const db = require('./index.js');
 
-//defines Items table
-const Items = db.define('items', {})
+// Defines Items table
+const Items = db.define('items', {});
 
-//defines Reviews table
+// Defines Reviews table
 const Reviews = db.define('reviews', {
   title: Sequelize.STRING,
   username: Sequelize.STRING,
@@ -12,17 +12,17 @@ const Reviews = db.define('reviews', {
   date: Sequelize.DATE,
   rating: Sequelize.INTEGER,
   likes: Sequelize.INTEGER,
-  imageUrl: Sequelize.STRING
+  imageUrl: Sequelize.STRING,
 });
 
-//foreign key 'itemId' set on Reviews table
-Reviews.belongsTo(Items, {as: 'item'});
+// Foreign key 'itemId' set on Reviews table
+Reviews.belongsTo(Items, { as: 'item' });
 
-//adds tables to db if they don't exist
+// Adds tables to db if they don't exist
 Items.sync();
 Reviews.sync();
 
 module.exports = {
-  Reviews: Reviews,
-  Items: Items
-}
+  Reviews,
+  Items,
+};
