@@ -70,6 +70,9 @@ let seed = async () => {
   Promise.resolve('success');
 }
 
+/***********************
+DATABASE SEEDING TESTING
+***********************/
 describe('Database', () => {
   beforeEach(async () => {
     //clears tables
