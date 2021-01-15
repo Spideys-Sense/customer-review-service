@@ -21,16 +21,14 @@ let createReview = (itemId) => {
   }
 
   return Reviews.create(currReviewData)
-    .catch((err) => {
-      console.error(err);
-    });
+    .catch(err => console.error(err));
 }
 
 let seed = () => {
-  for (var i = 0; i < 10; i++) {
+  for (var i = 1; i < 11; i++) {
     createItem();
     for (var j = 1; j < 11; j++) {
-      createReview(j);
+      createReview(i);
     }
   }
 }
