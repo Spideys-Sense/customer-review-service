@@ -1,19 +1,18 @@
-const { expect, should } = require('chai');
+const { expect } = require('chai');
 
-/**************************
+/* ************************
 SETTING UP TESTING DATABASE
-**************************/
+************************ */
 const Sequelize = require('sequelize');
-const mysql = require('mysql');
 
 const db = new Sequelize('customer_reviews_spec', 'root', '', {
   host: 'localhost',
-  dialect: 'mysql'
-})
+  dialect: 'mysql',
+});
 
-/************************
+/* **********************
 SETTING UP TESTING MODELS
-************************/
+********************** */
 const Items = db.define('items', {})
 
 const Reviews = db.define('reviews', {
@@ -31,51 +30,51 @@ Reviews.belongsTo(Items, {as: 'item'});
 Items.sync();
 Reviews.sync();
 
-/***************************
+/* *************************
 TESTING SEEDING FOR DATABASE
-***************************/
+************************* */
 const faker = require('faker');
 
-//Creates a new row in the items table//
-let createItem = (itemId) => {
-  return Items.create({})
-    .catch(err => console.error(err));
-}
+// Creates a new row in the items table
+const createItem = () => {
+  Items.create({})
+    .catch((err) => console.error(err));
+};
 
-//Creates a new row in the review table//
-let createReview = (itemId) => {
-  var currReviewData = {
-    itemId: itemId,
+// Creates a new row in the review table//
+const createReview = (itemId) => {
+  const currReviewData = {
+    itemId,
     title: faker.random.words(),
     username: faker.name.findName(),
     body: faker.lorem.paragraph(),
     date: faker.date.past(),
     rating: (Math.floor(faker.random.number() % 5) + 1),
     likes: faker.random.number(),
-    imageUrl: faker.image.imageUrl()
-  }
+    imageUrl: faker.image.imageUrl(),
+  };
 
   return Reviews.create(currReviewData)
-    .catch(err => console.error(err));
-}
+    .catch((err) => console.error(err));
+};
 
-//Seeds the database//
-let seed = async () => {
-  for (var i = 1; i < 11; i++) {
+// Seeds the database
+const seed = async () => {
+  for (let i = 1; i < 11; i++) {
     await createItem();
-    for (var j = 1; j < 11; j++) {
+    for (let j = 1; j < 11; j++) {
       await createReview(i);
     }
   }
   Promise.resolve('success');
-}
+};
 
-/***********************
+/* *********************
 DATABASE SEEDING TESTING
-***********************/
+********************* */
 describe('Database', () => {
   beforeEach(async () => {
-    //clears tables
+    // clears tables
     await db.drop();
     await db.sync();
   });

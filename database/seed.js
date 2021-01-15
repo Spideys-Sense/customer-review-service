@@ -3,14 +3,14 @@ const db = require('./index');
 const faker = require('faker');
 const {Reviews, Items} = require('./Model');
 
-//creates a row in the items table
-let createItem = (itemId) => {
+// Creates a row in the items table
+const createItem = (itemId) => {
   return Items.create({})
     .catch(err => console.error(err));
 }
 
-//creates a row in the reviews table
-let createReview = (itemId) => {
+// Creates a row in the reviews table
+const createReview = (itemId) => {
   var currReviewData = {
     itemId: itemId,
     title: faker.random.words(),
@@ -26,8 +26,8 @@ let createReview = (itemId) => {
     .catch(err => console.error(err));
 }
 
-//seeds db with random data (10 items, 100 reviews)
-let seed = () => {
+// Seeds db with random data (10 items, 100 reviews)
+const seed = () => {
   for (var i = 1; i < 11; i++) {
     createItem();
     for (var j = 1; j < 11; j++) {
