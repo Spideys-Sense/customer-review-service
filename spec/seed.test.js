@@ -75,11 +75,6 @@ const seed = async () => {
 DATABASE SEEDING TESTING
 ********************* */
 describe('Database', () => {
-  // beforeEach(async () => {
-  //   // Clears tables
-  //   await db.drop();
-  //   await db.sync();
-  // });
 
   it('should insert 10 rows to items table', async () => {
     await seed();
