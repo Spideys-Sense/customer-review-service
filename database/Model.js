@@ -18,10 +18,6 @@ const Reviews = db.define('reviews', {
 // Foreign key 'itemId' set on Reviews table
 Reviews.belongsTo(Items, { as: 'item' });
 
-// Adds tables to db if they don't exist
-Items.sync();
-Reviews.sync();
-
 module.exports = {
   Reviews,
   Items,

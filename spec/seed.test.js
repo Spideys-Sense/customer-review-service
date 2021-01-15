@@ -60,24 +60,26 @@ const createReview = (itemId) => {
 
 // Seeds the database
 const seed = async () => {
-  for (let i = 1; i < 11; i++) {
+  await db.drop();
+  await db.sync();
+
+  for (let i = 0; i < 10; i += 1) {
     await createItem();
-    for (let j = 1; j < 11; j++) {
-      await createReview(i);
-    }
   }
-  Promise.resolve('success');
+  for (let j = 0; j < 100; j += 1) {
+    await createReview();
+  }
 };
 
 /* *********************
 DATABASE SEEDING TESTING
 ********************* */
 describe('Database', () => {
-  beforeEach(async () => {
-    // Clears tables
-    await db.drop();
-    await db.sync();
-  });
+  // beforeEach(async () => {
+  //   // Clears tables
+  //   await db.drop();
+  //   await db.sync();
+  // });
 
   it('should insert 10 rows to items table', async () => {
     await seed();

@@ -1,5 +1,6 @@
 const faker = require('faker');
 const { Reviews, Items } = require('./Model');
+const db = require('./index');
 
 // Creates a row in the items table
 const createItem = () => (
@@ -8,9 +9,9 @@ const createItem = () => (
 );
 
 // Creates a row in the reviews table
-const createReview = (itemId) => {
+const createReview = () => {
   const currReviewData = {
-    itemId,
+    itemId: (Math.floor(faker.random.number() % 10) + 1),
     title: faker.random.words(),
     username: faker.name.findName(),
     body: faker.lorem.paragraph(),
@@ -25,12 +26,15 @@ const createReview = (itemId) => {
 };
 
 // Seeds db with random data (10 items, 100 reviews)
-const seed = () => {
-  for (let i = 1; i < 11; i += 1) {
-    createItem();
-    for (let j = 1; j < 11; j += 1) {
-      createReview(i);
-    }
+const seed = async () => {
+  await db.drop();
+  await db.sync();
+
+  for (let i = 0; i < 10; i += 1) {
+    await createItem();
+  }
+  for (let j = 0; j < 100; j += 1) {
+    await createReview();
   }
 };
 
