@@ -6,10 +6,43 @@ const path = require('path');
 
 const PORT = 1111;
 
-//displays client
+// Displays client
 app.use(express.static(path.join(__dirname, '../client/public')))
 
-//connects & listens to server on designated port
+// Retrieves/sends all reviews that match search criteria
+app.get('/api/:id/reviews', (req, res) => {
+
+  // Defining sorting metrics
+  const itemId = req.params.id;
+  let sortBy = req.query.sort_by;
+  let rating = (req.query.rating === '') ? [1, 2, 3, 4, 5] : req.query.rating;
+
+  // Converts sortBy metric to sequelize syntax
+  if (sortBy === 'newest') {
+    sortBy = [['date', 'DESC']];
+  } else if (sortBy === 'oldest') {
+    sortBy = [['date', 'ASC']];
+  } else if (sortBy === 'highest_rating') {
+    sortBy = [['rating', 'DESC']];
+  } else if (sortBy === 'lowest_rating') {
+    sortBy = [['rating', 'ASC']];
+  }
+
+  // Sends all results that match search criteria
+  return Reviews.findAll({
+    where: {
+      itemId,
+      rating,
+    },
+    order: sortBy
+  })
+    .then((results) => {
+      res.send(results);
+    })
+
+});
+
+// Connects & listens to server on designated port
 app.listen(PORT, () => {
   console.log('Server listening on port: ' + PORT);
 })
