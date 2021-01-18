@@ -1,0 +1,10 @@
+.app {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: 50%, 50%;
+}
+
+#review-average {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
