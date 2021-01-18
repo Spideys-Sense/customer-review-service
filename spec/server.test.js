@@ -1,14 +1,12 @@
 const { expect } = require('chai');
 const chai = require('chai')
-
-/* ********************
-SERVER ENDPOINT TESTING
-******************** */
-const axios = require('axios');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const connection = require('../server/index');
 
+/* ********************
+SERVER ENDPOINT TESTING
+******************** */
 describe('Server', () => {
   describe('GET', () => {
 
