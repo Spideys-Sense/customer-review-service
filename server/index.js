@@ -3,13 +3,11 @@ const app = express();
 const db = require('../database/index');
 const {Reviews, Items} = require('../database/Model');
 const path = require('path');
-const bodyParser = require('body-parser');
 const PORT = 3000;
 
 // Displays client
 app.use(express.static(path.join(__dirname, '../client/public')))
 
-// app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Retrieves/sends all reviews that match search criteria
@@ -45,7 +43,6 @@ app.get('/api/:id/reviews', (req, res) => {
 
 });
 
-// Connects & listens to server on designated port
 module.exports = app.listen(PORT, () => {
   console.log('Server listening on port: ' + PORT);
 })
