@@ -3,11 +3,13 @@ const app = express();
 const db = require('../database/index');
 const {Reviews, Items} = require('../database/Model');
 const path = require('path');
-
-const PORT = 1111;
+const bodyParser = require('body-parser');
+const PORT = 3000;
 
 // Displays client
 app.use(express.static(path.join(__dirname, '../client/public')))
+// app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Retrieves/sends all reviews that match search criteria
 app.get('/api/:id/reviews', (req, res) => {
@@ -16,7 +18,7 @@ app.get('/api/:id/reviews', (req, res) => {
   const itemId = req.params.id;
   let sortBy = req.query.sort_by;
   let rating = (req.query.rating === '') ? [1, 2, 3, 4, 5] : req.query.rating;
-
+  console.log('TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
   // Converts sortBy metric to sequelize syntax
   if (sortBy === 'newest') {
     sortBy = [['date', 'DESC']];
@@ -43,6 +45,6 @@ app.get('/api/:id/reviews', (req, res) => {
 });
 
 // Connects & listens to server on designated port
-app.listen(PORT, () => {
+module.exports = app.listen(PORT, () => {
   console.log('Server listening on port: ' + PORT);
 })

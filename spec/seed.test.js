@@ -74,7 +74,7 @@ const seed = async () => {
 /* *********************
 DATABASE SEEDING TESTING
 ********************* */
-describe('Database', () => {
+xdescribe('Database', () => {
 
   it('should insert 10 rows to items table', async () => {
     await seed();
