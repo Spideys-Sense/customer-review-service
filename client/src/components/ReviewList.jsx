@@ -8,6 +8,11 @@ const StyledReviewList = styled.div`
   border-style: solid;
 `
 
+const StyledReviewListHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
 const FilterByDropDown = () => (
   <select>
     <option value={[1, 2, 3, 4, 5]}>All stars</option>
@@ -34,16 +39,18 @@ const ReviewList = ({ reviews }) => (
   <StyledReviewList>
     <header>
       <h4>{reviews.length} Reviews</h4>
-        <div>
+        <StyledReviewListHeader>
           <p>Showing All Reviews</p>
+
           <p>Filter by: </p>
           <FilterByDropDown/>
+
           <p>Sort by: </p>
           <SortByDropDown/>
-        </div>
+        </StyledReviewListHeader>
     </header>
-    <main>
 
+    <main>
       {reviews.map((review) => (
         <ReviewListEntry review={review} />
       ))}
