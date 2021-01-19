@@ -37,14 +37,10 @@ class App extends React.Component {
   render() {
     return (
       <StyledApp>
-        {/*<div style={{'gridRow':1}}>*/}
           <ReviewAverage />
           <WriteReview />
-        {/* </div> */}
-        {/*<div style={{'gridRow':2}}>*/}
           <ReviewList />
           <PhotoGallery />
-        {/* </div> */}
       </StyledApp>
     )
   }

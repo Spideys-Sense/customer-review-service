@@ -1,4 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledWriteReview = styled.div`
+  grid-row: 1;
+  grid-column: 3 / span 3;
+`
 
 class WriteReview extends React.Component {
   constructor(props) {
@@ -12,7 +18,7 @@ class WriteReview extends React.Component {
 
   render() {
     return (
-      <div>WriteReview</div>
+      <StyledWriteReview>WriteReview</StyledWriteReview>
     );
   };
 };
