@@ -8,8 +8,8 @@ import axios from 'axios';
 
 const StyledApp = styled.div`
     display: grid;
-    grid-template-columns: repeat(5, 20%);
-    grid-template-rows: 50% 50%;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 5% 95%;
     border-style: solid;
 `;
 
@@ -25,6 +25,7 @@ class App extends React.Component {
   componentDidMount() {
     return axios.get(`/api/5/reviews/?sort_by=${'newest'}&rating=${''}`)
       .then(({ data }) => {
+        console.log(data);
         this.setState({
           reviews: data
         })
@@ -36,7 +37,7 @@ class App extends React.Component {
       <StyledApp>
           <ReviewAverage />
           <WriteReview />
-          <ReviewList />
+          <ReviewList reviews={this.state.reviews}/>
           <PhotoGallery />
       </StyledApp>
     )

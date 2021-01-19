@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledWriteReview = styled.div`
   grid-row: 1;
-  grid-column: 4 / span 2;
+  grid-column: 4 / -1;
   border-style: solid;
 `
 

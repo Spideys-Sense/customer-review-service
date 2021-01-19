@@ -8,9 +8,11 @@ const StyledReviewList = styled.div`
   border-style: solid;
 `
 
-let ReviewList = (props) => (
+let ReviewList = ({reviews}) => (
   <StyledReviewList>
-    <ReviewListEntry/>
+    {reviews.map((review) => (
+      <ReviewListEntry review={review} />
+    ))}
   </StyledReviewList>
 );
 
