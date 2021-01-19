@@ -11,7 +11,8 @@
     "start": "nodemon server/index.js",
     "build": "webpack --watch",
     "db:seed": "node database/seed.js",
-    "test": "mocha spec/"
+    "test": "mocha spec/",
+    "jest": "jest spec/App.test.js"
   },
   "dependencies": {
     "@babel/preset-react": "^7.12.10",
@@ -33,9 +34,13 @@
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@webpack-cli/init": "^1.1.1",
+    "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "css-loader": "^5.0.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-to-json": "^3.6.1",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
@@ -43,6 +48,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "jest": "^26.6.3",
     "mocha": "^8.2.1",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.1.1",

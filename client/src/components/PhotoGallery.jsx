@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledReviewList = styled.div`
+const StyledPhotoGallery = styled.div`
   grid-row: 2;
   grid-column: 5;
+  border-style: solid;
 `
 
 class PhotoGallery extends React.Component {
@@ -18,7 +19,7 @@ class PhotoGallery extends React.Component {
 
   render() {
     return (
-      <div>PhotoGallery</div>
+      <StyledPhotoGallery>PhotoGallery</StyledPhotoGallery>
     );
   };
 };

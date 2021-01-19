@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const StyledReviewList = styled.div`
   grid-row: 2;
   grid-column: 1 / span 4;
+  border-style: solid;
 `
 
 let ReviewList = (props) => (
