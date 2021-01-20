@@ -73,21 +73,43 @@ const StyledSortMenus = styled.div`
   margin-right: auto;
 `
 
-const ReviewListHeader = () => (
-  <StyledReviewListHeader>
-    <p>Showing All Reviews</p>
-    <StyledSortMenus>
-      <StyledDropDown>
-        <p style={{'display':'inline-block'}}>Filter by: </p>
-        <FilterByDropDown />
-      </StyledDropDown>
-      <StyledDropDown>
-        <p style={{'display':'inline-block'}}>Sort by: </p>
-        <SortByDropDown />
-      </StyledDropDown>
-    </StyledSortMenus>
-  </StyledReviewListHeader>
-);
+const ReviewListHeader = ({ loadAll, reviewsLength }) => {
+  if (loadAll) {
+    return (
+      <StyledReviewListHeader>
+        <p>Showing All Reviews</p>
+        <StyledSortMenus>
+          <StyledDropDown>
+            <p style={{ 'display': 'inline-block' }}>Filter by: </p>
+            <FilterByDropDown />
+          </StyledDropDown>
+          <StyledDropDown>
+            <p style={{ 'display': 'inline-block' }}>Sort by: </p>
+            <SortByDropDown />
+          </StyledDropDown>
+        </StyledSortMenus>
+      </StyledReviewListHeader>
+    )
+  } else {
+    return (
+
+      <StyledReviewListHeader>
+        <p>Showing 1-5 of {reviewsLength} Reviews</p>
+        <StyledSortMenus>
+          <StyledDropDown>
+            <p style={{ 'display': 'inline-block' }}>Filter by: </p>
+            <FilterByDropDown />
+          </StyledDropDown>
+          <StyledDropDown>
+            <p style={{ 'display': 'inline-block' }}>Sort by: </p>
+            <SortByDropDown />
+          </StyledDropDown>
+        </StyledSortMenus>
+      </StyledReviewListHeader>
+    )
+  }
+}
+
 
 const StyledReviewListTitle = styled.h4`
   margin-left: 2.5%;
@@ -101,24 +123,62 @@ const StyledLine = styled.hr`
   margin-right: auto;
 `
 
-const ReviewList = ({ reviews }) => (
-  <StyledReviewList>
-    <header>
-      <StyledReviewListTitle>{reviews.length} Reviews</StyledReviewListTitle>
-      <StyledLine></StyledLine>
-      <ReviewListHeader />
-      <StyledLine></StyledLine>
-    </header>
+const ReviewList = ({ reviews, loadAll, loadAllReviews }) => {
 
-    <main>
-      {reviews.map((review) => (
-        <div>
-          <ReviewListEntry review={review} />
+  if (loadAll) {
+    return (
+      <StyledReviewList>
+        <header>
+          <StyledReviewListTitle>{reviews.length} Reviews</StyledReviewListTitle>
           <StyledLine></StyledLine>
-        </div>
-      ))}
-    </main>
-  </StyledReviewList>
-);
+          <ReviewListHeader reviewsLength={reviews.length} loadAll={loadAll} />
+          <StyledLine></StyledLine>
+        </header>
+
+        <main>
+          {reviews.map((review) => (
+            <div>
+              <ReviewListEntry review={review} />
+              <StyledLine></StyledLine>
+            </div>
+          ))}
+        </main>
+      </StyledReviewList>
+    );
+  } else {
+    const initialReviews = [];
+    if (reviews.length > 5) {
+      for (let i = 0; i < 5; i++) {
+        initialReviews.push(reviews[i]);
+      }
+    } else {
+      reviews.forEach((review) => {
+        initialReviews.push(review);
+      })
+    }
+    return (
+      <StyledReviewList>
+        <header>
+          <StyledReviewListTitle>{reviews.length} Reviews</StyledReviewListTitle>
+          <StyledLine></StyledLine>
+          <ReviewListHeader loadAll={loadAll} />
+          <StyledLine></StyledLine>
+        </header>
+
+        <main>
+          {initialReviews.map((review) => (
+            <div>
+              <ReviewListEntry review={review} />
+              <StyledLine></StyledLine>
+            </div>
+          ))}
+        </main>
+        <button onClick={loadAllReviews}>Load More</button>
+      </StyledReviewList>
+    );
+  }
+}
+
+
 
 export default ReviewList;

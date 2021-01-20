@@ -21,18 +21,31 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      reviews: []
+      reviews: [],
+      loadAll: false
     }
+    this.loadAllReviews = this.loadAllReviews.bind(this);
   }
 
   componentDidMount() {
     return axios.get(`/api/5/reviews/?sort_by=${'newest'}&rating=${''}`)
       .then(({ data }) => {
-        console.log(data);
         this.setState({
           reviews: data
         })
       })
+  }
+
+  loadAllReviews() {
+    if(this.state.loadAll) {
+      this.setState({
+        loadAll: false
+      })
+    } else {
+      this.setState({
+        loadAll: true
+      })
+    }
   }
 
   render() {
@@ -40,7 +53,7 @@ class App extends React.Component {
       <StyledApp>
         <ReviewAverage />
         <WriteReview />
-        <ReviewList reviews={this.state.reviews}/>
+        <ReviewList loadAllReviews={this.loadAllReviews} loadAll={this.state.loadAll} reviews={this.state.reviews}/>
         <PhotoGallery />
       </StyledApp>
     )
