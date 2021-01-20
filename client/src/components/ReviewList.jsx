@@ -5,8 +5,10 @@ import styled from 'styled-components';
 const StyledReviewList = styled.div`
   grid-row: 2;
   grid-column: 1 / span 4;
-  border-style: solid;
+  /* border-style: solid; */
   padding: 20px;
+  list-style-type: none;
+  font-family: Roboto, serif;
 `
 
 const StyledReviewListHeader = styled.div`
@@ -57,6 +59,7 @@ const SortByDropDown = () => (
 const StyledSortMenus = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `
 
 const ReviewListHeader = () => (
@@ -75,6 +78,12 @@ const ReviewListHeader = () => (
   </StyledReviewListHeader>
 );
 
+const StyledReviewListTitle = styled.h4`
+  margin-left: 2.5%;
+  text-align: bottom;
+  margin-bottom: 0%;
+`
+
 const StyledLine = styled.hr`
   width: 95%;
   margin-left: auto;
@@ -84,7 +93,7 @@ const StyledLine = styled.hr`
 const ReviewList = ({ reviews }) => (
   <StyledReviewList>
     <header>
-      <h4 style={{ 'margin-left': '2.5%', 'textAlign': 'bottom' }}>{reviews.length} Reviews</h4>
+      <StyledReviewListTitle>{reviews.length} Reviews</StyledReviewListTitle>
       <StyledLine></StyledLine>
       <ReviewListHeader />
       <StyledLine></StyledLine>
@@ -92,7 +101,10 @@ const ReviewList = ({ reviews }) => (
 
     <main>
       {reviews.map((review) => (
-        <ReviewListEntry review={review} />
+        <div>
+          <ReviewListEntry review={review} />
+          <StyledLine></StyledLine>
+        </div>
       ))}
     </main>
   </StyledReviewList>

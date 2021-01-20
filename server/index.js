@@ -3,7 +3,7 @@ const app = express();
 const db = require('../database/index');
 const {Reviews, Items} = require('../database/Model');
 const path = require('path');
-const PORT = 3000;
+const PORT = 3001;
 
 // Displays client
 app.use(express.static(path.join(__dirname, '../client/public')))

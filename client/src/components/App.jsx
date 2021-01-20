@@ -10,10 +10,10 @@ const StyledApp = styled.div`
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: 5% 95%;
-    border-style: solid;
     padding: 50px;
-    margin-right: 150px;
-    margin-left: 150px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1100px;
 `;
 
 class App extends React.Component {
