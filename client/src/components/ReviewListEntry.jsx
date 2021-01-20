@@ -1,7 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledListEntry = styled.li`
+  font-family: Roboto, serif;
+`
 
 let ReviewListEntry = ({review}) => (
-  <li>
+  <StyledListEntry>
     <header>
       <div>
         {/*image with # of stars*/}
@@ -21,7 +26,7 @@ let ReviewListEntry = ({review}) => (
       <button>{review.likes} likes</button>
       <a href=''>Report</a>
     </footer>
-  </li>
+  </StyledListEntry>
 );
 
 export default ReviewListEntry;

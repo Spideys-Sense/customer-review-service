@@ -11,6 +11,9 @@ const StyledApp = styled.div`
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: 5% 95%;
     border-style: solid;
+    padding: 50px;
+    margin-right: 150px;
+    margin-left: 150px;
 `;
 
 class App extends React.Component {
@@ -35,13 +38,18 @@ class App extends React.Component {
   render() {
     return (
       <StyledApp>
-          <ReviewAverage />
-          <WriteReview />
-          <ReviewList reviews={this.state.reviews}/>
-          <PhotoGallery />
+        <ReviewAverage />
+        <WriteReview />
+        <ReviewList reviews={this.state.reviews}/>
+        <PhotoGallery />
       </StyledApp>
     )
   }
 }
 
 export default App;
+/*
+padding margins width/height
+using grid/flexbox
+border: thin solid black
+*/
