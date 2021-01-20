@@ -1,6 +1,6 @@
 import React from 'react';
-import ReviewListEntry from './ReviewListEntry.jsx';
 import styled from 'styled-components';
+import ReviewListEntry from './ReviewListEntry.jsx';
 
 const StyledReviewList = styled.div`
   grid-row: 2;
@@ -8,12 +8,9 @@ const StyledReviewList = styled.div`
   padding: 10px;
   list-style-type: none;
   font-family: Roboto, serif;
-`
+`;
 
 const StyledReviewListHeader = styled.div`
-  /* display: flex;
-  flex-direction: row; */
-  /* justify-content: space-between; */
   display: grid;
   grid-template-columns: repeat(1fr, 3);
   grid-template-rows: 100%;
@@ -24,14 +21,15 @@ const StyledReviewListHeader = styled.div`
   height: 50%;
   margin-top: auto;
   margin-bottom: auto;
-`
+`;
 
 const StyledDropDown = styled.div`
   display: flex;
   flex-direction: row;
   border-color: grey;
   display: inline-block;
-`
+`;
+
 const StyledSelectMenu = styled.select`
   margin-top: auto;
   margin-bottom: auto;
@@ -39,7 +37,7 @@ const StyledSelectMenu = styled.select`
   margin-right: 10px;
   height: 60%;
   display: inline-block;
-`
+`;
 
 const FilterByDropDown = () => (
   <StyledSelectMenu>
@@ -64,14 +62,10 @@ const SortByDropDown = () => (
 )
 
 const StyledSortMenus = styled.div`
-  /* display: flex;
-  flex-direction: row; */
   grid-column: 3 / span 1;
-  /* justify-content: space-between; */
-  /* display: inline-block; */
   margin-left: auto;
   margin-right: auto;
-`
+`;
 
 const ReviewListHeader = ({ loadAll, reviewsLength }) => {
   if (loadAll) {
@@ -89,10 +83,9 @@ const ReviewListHeader = ({ loadAll, reviewsLength }) => {
           </StyledDropDown>
         </StyledSortMenus>
       </StyledReviewListHeader>
-    )
+    );
   } else {
     return (
-
       <StyledReviewListHeader>
         <p>Showing 1-5 of {reviewsLength} Reviews</p>
         <StyledSortMenus>
@@ -106,9 +99,9 @@ const ReviewListHeader = ({ loadAll, reviewsLength }) => {
           </StyledDropDown>
         </StyledSortMenus>
       </StyledReviewListHeader>
-    )
+    );
   }
-}
+};
 
 
 const StyledReviewListTitle = styled.h4`
