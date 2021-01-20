@@ -8,6 +8,7 @@ const StyledListEntry = styled.li`
 const StyledReviewAuthor = styled.p`
   font-size: 80%;
   color: #555555;
+  margin-bottom: -1.15%;
 `
 
 const StyledReviewBody = styled.p`
@@ -15,16 +16,21 @@ const StyledReviewBody = styled.p`
 `
 
 const StyledLikeButton = styled.button`
-  background-color: white;
+  /* background-color: white;*/
   color: #555555;
-  border-color:grey;
+  border: 1px solid #bebebe;
+  text-align: center;
+  box-sizing: border-box;
+  /* width: 24px;
+  height: 18px; */
 `
 
 const StyledReviewTitle = styled.div`
   font-weight: bold;
-  font-size: 100%;
+  font-size: 90%;
   display: flex;
   flex-flow: row;
+  margin-bottom: -3%;
 `
 
 let ReviewListEntry = ({review}) => {
@@ -33,9 +39,9 @@ let ReviewListEntry = ({review}) => {
     <StyledListEntry>
     <header>
       <StyledReviewTitle>
-        <img src={starsUrl}></img>
+        <img style={{'margin-right':'10px'}}src={starsUrl}></img>
 
-        <h4 >{review.title}</h4>
+        <h4><b>{review.title}</b></h4>
       </StyledReviewTitle>
 
       <StyledReviewAuthor>By: {review.username} on {review.date}</StyledReviewAuthor>
@@ -49,7 +55,7 @@ let ReviewListEntry = ({review}) => {
     </main>
 
     <footer>
-      <StyledLikeButton>{review.likes} likes</StyledLikeButton>
+      <StyledLikeButton><b>{review.likes}</b></StyledLikeButton>
       <a href=''>Report</a>
     </footer>
   </StyledListEntry>

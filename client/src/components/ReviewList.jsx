@@ -5,16 +5,18 @@ import styled from 'styled-components';
 const StyledReviewList = styled.div`
   grid-row: 2;
   grid-column: 1 / span 4;
-  /* border-style: solid; */
-  padding: 20px;
+  padding: 10px;
   list-style-type: none;
   font-family: Roboto, serif;
 `
 
 const StyledReviewListHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  /* display: flex;
+  flex-direction: row; */
+  /* justify-content: space-between; */
+  display: grid;
+  grid-template-columns: repeat(1fr, 3);
+  grid-template-rows: 100%;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -27,11 +29,16 @@ const StyledReviewListHeader = styled.div`
 const StyledDropDown = styled.div`
   display: flex;
   flex-direction: row;
+  border-color: grey;
+  display: inline-block;
 `
 const StyledSelectMenu = styled.select`
   margin-top: auto;
   margin-bottom: auto;
+  margin-left: 10px;
+  margin-right: 10px;
   height: 60%;
+  display: inline-block;
 `
 
 const FilterByDropDown = () => (
@@ -57,9 +64,13 @@ const SortByDropDown = () => (
 )
 
 const StyledSortMenus = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  /* display: flex;
+  flex-direction: row; */
+  grid-column: 3 / span 1;
+  /* justify-content: space-between; */
+  /* display: inline-block; */
+  margin-left: auto;
+  margin-right: auto;
 `
 
 const ReviewListHeader = () => (
@@ -67,11 +78,11 @@ const ReviewListHeader = () => (
     <p>Showing All Reviews</p>
     <StyledSortMenus>
       <StyledDropDown>
-        <p>Filter by: </p>
+        <p style={{'display':'inline-block'}}>Filter by: </p>
         <FilterByDropDown />
       </StyledDropDown>
       <StyledDropDown>
-        <p>Sort by: </p>
+        <p style={{'display':'inline-block'}}>Sort by: </p>
         <SortByDropDown />
       </StyledDropDown>
     </StyledSortMenus>
@@ -85,7 +96,7 @@ const StyledReviewListTitle = styled.h4`
 `
 
 const StyledLine = styled.hr`
-  width: 95%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 `
