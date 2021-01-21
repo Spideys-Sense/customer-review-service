@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledPhotoGallery = styled.div`
   grid-row: 2;
-  grid-column: 5 / -1;
+  grid-column: 6 / -1;
   border-style: solid;
 `
 

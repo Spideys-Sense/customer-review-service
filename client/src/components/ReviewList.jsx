@@ -4,7 +4,7 @@ import ReviewListEntry from './ReviewListEntry.jsx';
 
 const StyledReviewList = styled.div`
   grid-row: 2;
-  grid-column: 1 / span 4;
+  grid-column: 1 / span 5;
   padding: 10px;
   list-style-type: none;
   font-family: Roboto, serif;

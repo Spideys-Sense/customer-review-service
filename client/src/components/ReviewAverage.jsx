@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const StyledReviewAverage = styled.div`
   grid-row: 1;
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 3;
   font-family: Roboto, serif;
 `;
 

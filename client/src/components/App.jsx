@@ -8,7 +8,7 @@ import PhotoGallery from './PhotoGallery.jsx';
 
 const StyledApp = styled.div`
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 15% 85%;
     padding: 50px;
     margin-right: auto;
