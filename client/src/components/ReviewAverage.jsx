@@ -19,7 +19,6 @@ const StyledReviewRatingGraph = styled.div`
   display: grid;
   grid-template-columns: 1fr 5fr 1fr;
   grid-template-rows: repeat(5, 1fr);
-  border: solid;
 `
 
 const StyledStarBar = styled.div`
@@ -29,18 +28,22 @@ const StyledStarBar = styled.div`
   border-radius: 3px;
 `
 
-const ReviewAverage = ({ reviews, average }) => (
+const ReviewAverage = ({ reviews, averages }) => (
   <StyledReviewAverage>
     <h2>Customer Reviews</h2>
     <StyledReviewAverageSubheader>
       <div>stars</div>
       <div style={{'color':'#2e5ee2'}}>{reviews.length} Reviews</div>
-      <div>{average} out of 5 stars</div>
+      <div>{averages[0]} out of 5 stars</div>
     </StyledReviewAverageSubheader>
     <div>
       <p>Filter reviews by star rating</p>
       <StyledReviewRatingGraph>
-      <div>5</div><StyledStarBar></StyledStarBar><div>%</div>
+      <div>5</div><StyledStarBar barSize={averages[5]}></StyledStarBar><div>{averages[5]}</div>
+      <div>4</div><StyledStarBar barSize={averages[4]}></StyledStarBar><div>{averages[4]}</div>
+      <div>3</div><StyledStarBar barSize={averages[3]}></StyledStarBar><div>{averages[3]}</div>
+      <div>2</div><StyledStarBar barSize={averages[2]}></StyledStarBar><div>{averages[2]}</div>
+      <div>1</div><StyledStarBar barSize={averages[1]}></StyledStarBar><div>{averages[1]}</div>
       <div>hello</div>
       <div>hello</div>
       </StyledReviewRatingGraph>

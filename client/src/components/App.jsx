@@ -22,11 +22,12 @@ class App extends React.Component {
 
     this.state = {
       reviews: [],
-      averages: null,
+      averages: [],
       loadAll: false,
     };
 
     this.loadAllReviews = this.loadAllReviews.bind(this);
+    this.getAllReviews = this.getAllReviews.bind(this);
     this.getReviewAverages = this.getReviewAverages.bind(this);
   }
 
