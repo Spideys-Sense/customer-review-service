@@ -9,7 +9,7 @@ import PhotoGallery from './PhotoGallery.jsx';
 const StyledApp = styled.div`
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 5% 95%;
+    grid-template-rows: 20% 80%;
     padding: 50px;
     margin-right: auto;
     margin-left: auto;

@@ -30,7 +30,8 @@ const StyledReviewTitle = styled.div`
   margin-bottom: -3%;
 `;
 const ReviewListEntry = ({ review }) => {
-  const starsUrl = `https://www.chewy.com/assets/img/ratings/rating-${review.rating}_0.svg`
+  const starsUrl = `https://www.chewy.com/assets/img/ratings/rating-${review.rating}_0.svg`;
+
   return (
     <StyledListEntry>
       <header>

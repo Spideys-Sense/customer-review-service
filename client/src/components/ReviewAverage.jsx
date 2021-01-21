@@ -8,7 +8,18 @@ const StyledReviewAverage = styled.div`
 `;
 
 const ReviewAverage = () => (
-  <StyledReviewAverage>ReviewAverage</StyledReviewAverage>
+  <StyledReviewAverage>
+    <h1>title</h1>
+    <div>
+      <div>stars | </div>
+      <div># of reviews | </div>
+      <div>average rating</div>
+    </div>
+    <div>
+      <p>Filter reviews by star rating</p>
+      <div>star ratings</div>
+    </div>
+  </StyledReviewAverage>
 );
 
 export default ReviewAverage;
