@@ -22,16 +22,25 @@ class App extends React.Component {
 
     this.state = {
       reviews: [],
+      averageRating: null,
       loadAll: false,
     };
+
     this.loadAllReviews = this.loadAllReviews.bind(this);
   }
 
   componentDidMount() {
     return axios.get(`/api/5/reviews/?sort_by=${'newest'}&rating=${''}`)
       .then(({ data }) => {
+        let average = 0;
+        data.forEach((review) => {
+          average += review.rating;
+        })
+        average /= data.length;
+
         this.setState({
           reviews: data,
+          averageRating: average.toFixed(2),
         });
       });
   }
@@ -51,7 +60,7 @@ class App extends React.Component {
   render() {
     return (
       <StyledApp>
-        <ReviewAverage />
+        <ReviewAverage average={this.state.averageRating} reviews={this.state.reviews} />
         <WriteReview />
         <ReviewList loadAllReviews={this.loadAllReviews} loadAll={this.state.loadAll} reviews={this.state.reviews} />
         <PhotoGallery />
