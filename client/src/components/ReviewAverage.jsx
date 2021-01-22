@@ -13,7 +13,7 @@ const StyledReviewAverageSubheader = styled.div`
   justify-content: space-between;
   width: 65%;
   font-size: 13px;
-`
+`;
 
 const StyledReviewRatingGraph = styled.div`
   display: grid;
@@ -21,7 +21,7 @@ const StyledReviewRatingGraph = styled.div`
   grid-template-rows: repeat(5, 1fr);
   width: 80%;
   margin-bottom: 10px;
-`
+`;
 
 const StyledStarBar = styled.div`
   width: ${props => props.barSize};
@@ -30,7 +30,7 @@ const StyledStarBar = styled.div`
   border-radius: 3px;
   margin-top: auto;
   margin-bottom: auto;
-`
+`;
 
 const StyledStarGraphText = styled.div`
   font-size: 11px;
@@ -49,14 +49,16 @@ const StyledStarImage = styled.div`
   padding: 0px;
   z-index: 1;
   overflow: hidden;
-  width: 50%;
-`
+  width: ${(props) => (
+    Math.floor((props.averageRating / 5) * 100).toString().concat('%')
+  )};
+`;
 
 const StyledEmptyStarImage = styled.div`
   padding: 0;
   display: block;
   z-index: 0;
-`
+`;
 
 const StyledStarRating = styled.span`
   unicode-bidi: bidi-override;
@@ -67,20 +69,20 @@ const StyledStarRating = styled.span`
   position: relative;
   padding: 0;
   text-shadow: 0px 1px 0 #a2a2a2;
-`
+`;
 
 const StyledTotalReviewCount = styled.span`
   color: #0E70BE;
   cursor: pointer;
   text-decoration: underline;
-`
+`;
 
 const ReviewAverage = ({ reviews, averages, loadAllReviews }) => (
   <StyledReviewAverage>
     <h2 style={{'margin-top':'0px'}}>Customer Reviews</h2>
     <StyledReviewAverageSubheader>
       <StyledStarRating>
-        <StyledStarImage>
+        <StyledStarImage averageRating={averages[0]}>
           <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
         </StyledStarImage>
         <StyledEmptyStarImage>
