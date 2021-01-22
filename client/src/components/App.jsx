@@ -9,7 +9,7 @@ import PhotoGallery from './PhotoGallery.jsx';
 const StyledApp = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 15% 85%;
+    grid-template-rows: min-content auto;
     padding: 50px;
     margin-right: auto;
     margin-left: auto;
@@ -59,11 +59,7 @@ class App extends React.Component {
   }
 
   loadAllReviews() {
-    if (this.state.loadAll) {
-      this.setState({
-        loadAll: false,
-      });
-    } else {
+    if (!this.state.loadAll) {
       this.setState({
         loadAll: true,
       });
@@ -73,7 +69,7 @@ class App extends React.Component {
   render() {
     return (
       <StyledApp>
-        <ReviewAverage averages={this.state.averages} reviews={this.state.reviews} />
+        <ReviewAverage loadAllReviews={this.loadAllReviews} averages={this.state.averages} reviews={this.state.reviews} />
         <WriteReview />
         <ReviewList loadAllReviews={this.loadAllReviews} loadAll={this.state.loadAll} reviews={this.state.reviews} />
         <PhotoGallery />
