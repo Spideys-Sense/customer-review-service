@@ -14,6 +14,7 @@ const StyledApp = styled.div`
     margin-right: auto;
     margin-left: auto;
     max-width: 1100px;
+    font-family: Roboto, serif;
 `;
 
 class App extends React.Component {
@@ -79,7 +80,7 @@ class App extends React.Component {
           loadAll={this.state.loadAll}
           reviews={this.state.reviews}
         />
-        <PhotoGallery />
+        <PhotoGallery reviews={this.state.reviews}/>
       </StyledApp>
     );
   }
