@@ -48,17 +48,17 @@ app.get('/api/:id/reviewAverages', async (req, res) => {
   // Defining sorting metrics
   const itemId = req.params.id;
   var allAverages = [];
-  let allReviews = await Reviews.findAll({
+  const allReviews = await Reviews.findAll({
     where: {
       itemId,
-    }
+    },
   });
 
   // Calculates and stores the average rating for this item
   let average = 0;
   allReviews.forEach((review) => {
     average += review.rating;
-  })
+  });
   average /= allReviews.length;
 
   allAverages.push(average.toFixed(2));
@@ -77,8 +77,8 @@ app.get('/api/:id/reviewAverages', async (req, res) => {
 
   // Sent as: [averageRating, % of 1 star, % of 2 star...]
   res.send(allAverages);
-})
+});
 
 module.exports = app.listen(PORT, () => {
   console.log('Server listening on port: ' + PORT);
-})
+});

@@ -37,25 +37,24 @@ class App extends React.Component {
     this.getReviewAverages();
   }
 
-  getAllReviews () {
+  getAllReviews() {
     return axios.get(`/api/5/reviews/?sort_by=${'newest'}&rating=${''}`)
       .then(({ data }) => {
         this.setState({
           reviews: data,
-        })
+        });
       })
-      .catch(err => console.error(err))
-    }
+      .catch((err) => console.error(err));
+  }
 
-
-  getReviewAverages () {
+  getReviewAverages() {
     return axios.get('/api/5/reviewAverages')
       .then(({ data }) => {
         this.setState({
           averages: data,
-        })
+        });
       })
-      .catch(err => console.error(err))
+      .catch((err) => console.error(err));
   }
 
   loadAllReviews() {
@@ -69,9 +68,17 @@ class App extends React.Component {
   render() {
     return (
       <StyledApp>
-        <ReviewAverage loadAllReviews={this.loadAllReviews} averages={this.state.averages} reviews={this.state.reviews} />
+        <ReviewAverage
+          loadAllReviews={this.loadAllReviews}
+          averages={this.state.averages}
+          reviews={this.state.reviews}
+        />
         <WriteReview />
-        <ReviewList loadAllReviews={this.loadAllReviews} loadAll={this.state.loadAll} reviews={this.state.reviews} />
+        <ReviewList
+          loadAllReviews={this.loadAllReviews}
+          loadAll={this.state.loadAll}
+          reviews={this.state.reviews}
+        />
         <PhotoGallery />
       </StyledApp>
     );
