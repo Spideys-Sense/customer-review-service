@@ -4,7 +4,7 @@ import ReviewListEntry from './ReviewListEntry.jsx';
 
 const StyledReviewList = styled.div`
   grid-row: 2;
-  grid-column: 1 / span 4;
+  grid-column: 1 / span 5;
   padding: 10px;
   list-style-type: none;
   font-family: Roboto, serif;
@@ -54,10 +54,10 @@ const FilterByDropDown = () => (
 
 const SortByDropDown = () => (
   <StyledSelectMenu>
-    <option value='newest'>Newest</option>
-    <option value='oldest'>Oldest</option>
-    <option value='highest_rating'>Highest rating</option>
-    <option value='lowest_rating'>Lowest rating</option>
+    <option value="newest">Newest</option>
+    <option value="oldest">Oldest</option>
+    <option value="highest_rating">Highest rating</option>
+    <option value="lowest_rating">Lowest rating</option>
   </StyledSelectMenu>
 )
 
@@ -103,36 +103,34 @@ const ReviewListHeader = ({ loadAll, reviewsLength }) => {
   }
 };
 
-
 const StyledReviewListTitle = styled.h4`
   margin-left: 2.5%;
   text-align: bottom;
   margin-bottom: 0%;
-`
+`;
 
 const StyledLine = styled.hr`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-`
+`;
 
 const ReviewList = ({ reviews, loadAll, loadAllReviews }) => {
-
   if (loadAll) {
     return (
       <StyledReviewList>
         <header>
           <StyledReviewListTitle>{reviews.length} Reviews</StyledReviewListTitle>
-          <StyledLine></StyledLine>
+          <StyledLine />
           <ReviewListHeader reviewsLength={reviews.length} loadAll={loadAll} />
-          <StyledLine></StyledLine>
+          <StyledLine />
         </header>
 
         <main>
           {reviews.map((review) => (
             <div>
               <ReviewListEntry review={review} />
-              <StyledLine></StyledLine>
+              <StyledLine />
             </div>
           ))}
         </main>
@@ -170,8 +168,6 @@ const ReviewList = ({ reviews, loadAll, loadAllReviews }) => {
       </StyledReviewList>
     );
   }
-}
-
-
+};
 
 export default ReviewList;

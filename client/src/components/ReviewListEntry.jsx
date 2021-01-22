@@ -30,12 +30,13 @@ const StyledReviewTitle = styled.div`
   margin-bottom: -3%;
 `;
 const ReviewListEntry = ({ review }) => {
-  const starsUrl = `https://www.chewy.com/assets/img/ratings/rating-${review.rating}_0.svg`
+  const starsUrl = `https://www.chewy.com/assets/img/ratings/rating-${review.rating}_0.svg`;
+
   return (
     <StyledListEntry>
       <header>
         <StyledReviewTitle>
-          <img style={{ 'margin-right': '10px' }} src={starsUrl} alt={review.rating + '  stars'}></img>
+          <img style={{ 'margin-right': '10px' }} src={starsUrl} alt={review.rating + '  stars'} />
 
           <h4><b>{review.title}</b></h4>
         </StyledReviewTitle>
@@ -48,7 +49,7 @@ const ReviewListEntry = ({ review }) => {
         <img style={{
           'width': '70px',
           'height': 'auto'
-        }} src={review.imageUrl} alt='failed to load'></img>
+        }} src={review.imageUrl} alt='failed to load' />
       </main>
 
       <footer>
