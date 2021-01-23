@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import PhotoGalleryModal from './PhotoGalleryModal.jsx';
 
 const StyledPhotoGallery = styled.div`
   grid-row: 2;
   grid-column: 6 / -1;
-  display: grid;
-  grid-template-rows: 1fr 2.5fr;
-  grid-template-columns: none;
   margin-bottom: 1100px;
 `;
 
@@ -18,8 +16,6 @@ const StyledSeeAllPhotos = styled.span`
   text-decoration: underline;
   font-size: 12px;
   float: right;
-  margin-bottom: 0px;
-  margin-top: 32px;
   grid-row: 1;
   grid-column: 1;
   text-align: right;
@@ -39,16 +35,23 @@ const StyledPhotoGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr 1fr;
   grid-row: 2;
+  margin-top: 10px;
+  margin-bottom: auto;
 `;
 
 const StyledImage = styled.img`
   width: 60px;
   height: 60px;
   align-content: center;
-  margin-bottom: 9px;
-  margin-top: 9px;
-  margin-left: 0;
-  margin-right: 0;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+`;
+
+const PhotoGalleryHeader = styled.div`
+  margin-top: 32px;
+  max-height: 100px;
 `;
 
 class PhotoGallery extends React.Component {
@@ -64,8 +67,10 @@ class PhotoGallery extends React.Component {
   render() {
     return (
       <StyledPhotoGallery>
-        <StyledCustomerPhotosTitle>Customer Photos</StyledCustomerPhotosTitle>
-        <StyledSeeAllPhotos>See All Photos</StyledSeeAllPhotos>
+        <PhotoGalleryHeader>
+          <StyledCustomerPhotosTitle>Customer Photos</StyledCustomerPhotosTitle>
+          <StyledSeeAllPhotos onClick={this.props.showModal}>See All Photos</StyledSeeAllPhotos>
+        </PhotoGalleryHeader>
         <StyledPhotoGrid>
           {this.props.reviews.slice(0, 8).map((review) => (
             <StyledImage src={review.imageUrl} alt='failed to load' />

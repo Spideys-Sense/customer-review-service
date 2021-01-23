@@ -5,6 +5,7 @@ import ReviewAverage from './ReviewAverage.jsx';
 import ReviewList from './ReviewList.jsx';
 import WriteReview from './WriteReview.jsx';
 import PhotoGallery from './PhotoGallery.jsx';
+import PhotoGalleryModal from './PhotoGalleryModal.jsx';
 
 const StyledApp = styled.div`
     display: grid;
@@ -25,11 +26,14 @@ class App extends React.Component {
       reviews: [],
       averages: [],
       loadAll: false,
+      showPhotos: false,
     };
 
     this.loadAllReviews = this.loadAllReviews.bind(this);
     this.getAllReviews = this.getAllReviews.bind(this);
     this.getReviewAverages = this.getReviewAverages.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
   componentDidMount() {
@@ -66,22 +70,37 @@ class App extends React.Component {
     }
   }
 
+  showModal() {
+    this.setState({
+      showPhotos: true,
+    })
+  }
+
+  hideModal() {
+    this.setState({
+      showPhotos: false,
+    })
+  }
+
   render() {
     return (
-      <StyledApp>
-        <ReviewAverage
-          loadAllReviews={this.loadAllReviews}
-          averages={this.state.averages}
-          reviews={this.state.reviews}
-        />
-        <WriteReview />
-        <ReviewList
-          loadAllReviews={this.loadAllReviews}
-          loadAll={this.state.loadAll}
-          reviews={this.state.reviews}
-        />
-        <PhotoGallery reviews={this.state.reviews}/>
-      </StyledApp>
+      <div>
+        <StyledApp>
+          <ReviewAverage
+            loadAllReviews={this.loadAllReviews}
+            averages={this.state.averages}
+            reviews={this.state.reviews}
+          />
+          <WriteReview />
+          <ReviewList
+            loadAllReviews={this.loadAllReviews}
+            loadAll={this.state.loadAll}
+            reviews={this.state.reviews}
+          />
+          <PhotoGallery reviews={this.state.reviews} showModal={this.showModal}/>
+        </StyledApp>
+        <PhotoGalleryModal hideModal={this.hideModal} isVisible={this.state.showPhotos} reviews={this.state.reviews} />
+      </div>
     );
   }
 }
