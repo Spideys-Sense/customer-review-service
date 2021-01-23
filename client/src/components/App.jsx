@@ -32,8 +32,8 @@ class App extends React.Component {
     this.loadAllReviews = this.loadAllReviews.bind(this);
     this.getAllReviews = this.getAllReviews.bind(this);
     this.getReviewAverages = this.getReviewAverages.bind(this);
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
+    this.showPhotosModal = this.showPhotosModal.bind(this);
+    this.hidePhotosModal = this.hidePhotosModal.bind(this);
   }
 
   componentDidMount() {
@@ -70,13 +70,13 @@ class App extends React.Component {
     }
   }
 
-  showModal() {
+  showPhotosModal() {
     this.setState({
       showPhotos: true,
     })
   }
 
-  hideModal() {
+  hidePhotosModal() {
     this.setState({
       showPhotos: false,
     })
@@ -97,9 +97,9 @@ class App extends React.Component {
             loadAll={this.state.loadAll}
             reviews={this.state.reviews}
           />
-          <PhotoGallery reviews={this.state.reviews} showModal={this.showModal}/>
+          <PhotoGallery reviews={this.state.reviews} showModal={this.showPhotosModal}/>
         </StyledApp>
-        <PhotoGalleryModal hideModal={this.hideModal} isVisible={this.state.showPhotos} reviews={this.state.reviews} />
+        <PhotoGalleryModal hideModal={this.hidePhotosModal} isVisible={this.state.showPhotos} reviews={this.state.reviews} />
       </div>
     );
   }
