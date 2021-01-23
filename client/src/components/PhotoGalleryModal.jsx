@@ -47,30 +47,28 @@ const StyledPhotoModalTitle = styled.span`
   font-weight: bold;
 `;
 
-const PhotoGalleryModal = ({isVisible, reviews, hideModal}) => {
+const PhotoGalleryModal = ({ isVisible, reviews, hideModal }) => {
   if (isVisible) {
     return (
-      <div style={{display: 'block'}}>
+      <div style={{ display: 'block' }}>
         <StyledModal>
           <StyledModalContent>
             <StyledPhotoModalTitle>Customer Photos ({reviews.length})</StyledPhotoModalTitle>
             <StyledExitModalX onClick={hideModal}>X</StyledExitModalX>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
+            <br />
             {reviews.map((review) => (
               <StyledImage src={review.imageUrl} alt='failed to load' />
             ))}
           </StyledModalContent>
         </StyledModal>
       </div>
-    )
+    );
   } else {
     return <div />
   }
-}
-
-
+};
 
 export default PhotoGalleryModal;

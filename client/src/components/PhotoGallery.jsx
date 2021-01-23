@@ -5,6 +5,7 @@ import PhotoGalleryModal from './PhotoGalleryModal.jsx';
 const StyledPhotoGallery = styled.div`
   grid-row: 2;
   grid-column: 6 / -1;
+
   margin-bottom: 1100px;
 `;
 
@@ -54,31 +55,18 @@ const PhotoGalleryHeader = styled.div`
   max-height: 100px;
 `;
 
-class PhotoGallery extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // this.state = {
-
-    // }
-
-  }
-
-  render() {
-    return (
-      <StyledPhotoGallery>
-        <PhotoGalleryHeader>
-          <StyledCustomerPhotosTitle>Customer Photos</StyledCustomerPhotosTitle>
-          <StyledSeeAllPhotos onClick={this.props.showModal}>See All Photos</StyledSeeAllPhotos>
-        </PhotoGalleryHeader>
-        <StyledPhotoGrid>
-          {this.props.reviews.slice(0, 8).map((review) => (
-            <StyledImage src={review.imageUrl} alt='failed to load' />
-          ))}
-        </StyledPhotoGrid>
-      </StyledPhotoGallery>
-    );
-  };
-};
+const PhotoGallery = (props) => (
+  <StyledPhotoGallery>
+    <PhotoGalleryHeader>
+      <StyledCustomerPhotosTitle>Customer Photos</StyledCustomerPhotosTitle>
+      <StyledSeeAllPhotos onClick={props.showModal}>See All Photos</StyledSeeAllPhotos>
+    </PhotoGalleryHeader>
+    <StyledPhotoGrid>
+      {props.reviews.slice(0, 8).map((review) => (
+        <StyledImage src={review.imageUrl} alt='failed to load' />
+      ))}
+    </StyledPhotoGrid>
+  </StyledPhotoGallery>
+);
 
 export default PhotoGallery;
