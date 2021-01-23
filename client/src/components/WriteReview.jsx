@@ -7,21 +7,10 @@ const StyledWriteReview = styled.div`
   border-style: solid;
 `;
 
-class WriteReview extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // this.state = {
-
-    // }
-
-  }
-
-  render() {
-    return (
-      <StyledWriteReview>WriteReview</StyledWriteReview>
-    );
-  };
-};
+const WriteReview = ({ reviews, showModal }) => (
+  <StyledWriteReview>
+    <button onClick={showModal}>SHOW MODAL</button>
+  </StyledWriteReview>
+)
 
 export default WriteReview;
