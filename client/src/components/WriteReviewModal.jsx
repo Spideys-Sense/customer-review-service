@@ -80,7 +80,7 @@ const StyledAddPhotoButton = styled.button`
 `;
 
 const CameraIcon = styled.svg`
-    width: 30px;
+    width:  30px;
     height: 24px;
     vertical-align: -6px;
     margin: -3px 8px 0 0;

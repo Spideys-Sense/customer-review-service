@@ -29,6 +29,7 @@ class App extends React.Component {
       loadAll: false,
       showPhotos: false,
       showReviewForm: false,
+      percentRecommended: null
     };
 
     this.loadAllReviews = this.loadAllReviews.bind(this);
@@ -38,6 +39,7 @@ class App extends React.Component {
     this.hidePhotosModal = this.hidePhotosModal.bind(this);
     this.showWriteReviewModal = this.showWriteReviewModal.bind(this);
     this.hideWriteReviewModal = this.hideWriteReviewModal.bind(this);
+    this.calcPercentRecommended = this.calcPercentRecommended.bind(this);
   }
 
   componentDidMount() {
@@ -61,7 +63,7 @@ class App extends React.Component {
       .then(({ data }) => {
         this.setState({
           averages: data,
-        });
+        }, this.calcPercentRecommended)
       })
       .catch((err) => console.error(err));
   }
@@ -98,6 +100,13 @@ class App extends React.Component {
     })
   }
 
+  calcPercentRecommended() {
+    let percent = (parseInt(this.state.averages[3].slice(0, -1)) + parseInt(this.state.averages[4].slice(0, -1)) + parseInt(this.state.averages[5].slice(0, -1)))
+    this.setState({
+      percentRecommended: percent,
+    })
+  }
+
   render() {
     return (
       <div>
@@ -109,6 +118,7 @@ class App extends React.Component {
           />
           <WriteReview
             showModal={this.showWriteReviewModal}
+            percentRecommended={this.state.percentRecommended}
           />
           <ReviewList
             loadAllReviews={this.loadAllReviews}
