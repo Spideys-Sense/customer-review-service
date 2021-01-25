@@ -5,6 +5,7 @@ import ReviewAverage from './ReviewAverage.jsx';
 import ReviewList from './ReviewList.jsx';
 import WriteReview from './WriteReview.jsx';
 import PhotoGallery from './PhotoGallery.jsx';
+import PhotoGalleryModal from './PhotoGalleryModal.jsx';
 
 const StyledApp = styled.div`
     display: grid;
@@ -14,6 +15,7 @@ const StyledApp = styled.div`
     margin-right: auto;
     margin-left: auto;
     max-width: 1100px;
+    font-family: Roboto, serif;
 `;
 
 class App extends React.Component {
@@ -24,11 +26,16 @@ class App extends React.Component {
       reviews: [],
       averages: [],
       loadAll: false,
+      showPhotos: false,
     };
 
     this.loadAllReviews = this.loadAllReviews.bind(this);
     this.getAllReviews = this.getAllReviews.bind(this);
     this.getReviewAverages = this.getReviewAverages.bind(this);
+    this.showPhotosModal = this.showPhotosModal.bind(this);
+    this.hidePhotosModal = this.hidePhotosModal.bind(this);
+    this.showWriteReviewModal = this.showWriteReviewModal.bind(this);
+    this.hideWriteReviewModal = this.hideWriteReviewModal.bind(this);
   }
 
   componentDidMount() {
@@ -65,22 +72,52 @@ class App extends React.Component {
     }
   }
 
+  showPhotosModal() {
+    this.setState({
+      showPhotos: true,
+    })
+  }
+
+  hidePhotosModal() {
+    this.setState({
+      showPhotos: false,
+    })
+  }
+
+  showWriteReviewModal() {
+
+  }
+
+  hideWriteReviewModal() {
+
+  }
+
   render() {
     return (
-      <StyledApp>
-        <ReviewAverage
-          loadAllReviews={this.loadAllReviews}
-          averages={this.state.averages}
+      <div>
+        <StyledApp>
+          <ReviewAverage
+            loadAllReviews={this.loadAllReviews}
+            averages={this.state.averages}
+            reviews={this.state.reviews}
+          />
+          <WriteReview
+            hideModal={this.hideWriteReviewModal}
+            showModal={this.showWriteReviewModal}
+          />
+          <ReviewList
+            loadAllReviews={this.loadAllReviews}
+            loadAll={this.state.loadAll}
+            reviews={this.state.reviews}
+          />
+          <PhotoGallery reviews={this.state.reviews} showModal={this.showPhotosModal}/>
+        </StyledApp>
+        <PhotoGalleryModal
+          hideModal={this.hidePhotosModal}
+          isVisible={this.state.showPhotos}
           reviews={this.state.reviews}
         />
-        <WriteReview />
-        <ReviewList
-          loadAllReviews={this.loadAllReviews}
-          loadAll={this.state.loadAll}
-          reviews={this.state.reviews}
-        />
-        <PhotoGallery />
-      </StyledApp>
+      </div>
     );
   }
 }

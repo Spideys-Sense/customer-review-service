@@ -7,6 +7,28 @@ const StyledWriteReview = styled.div`
   border-style: solid;
 `;
 
+const StyledModal = styled.div`
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 100px;
+  background-color: rgba(0, 0, 0, 0.75);
+  transition: all 0.3s linear;
+`;
+
+const StyledModalContent = styled.div`
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border-radius: 4px;
+  max-width: 500px;
+  height: 800px;
+  overflow: hidden;
+`;
+
 class WriteReview extends React.Component {
   constructor(props) {
     super(props);
