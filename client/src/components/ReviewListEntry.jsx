@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 
 const StyledListEntry = styled.li`
   font-family: Roboto, serif;
@@ -41,7 +42,7 @@ const ReviewListEntry = ({ review }) => {
           <h4><b>{review.title}</b></h4>
         </StyledReviewTitle>
 
-        <StyledReviewAuthor>By: {review.username} on {review.date}</StyledReviewAuthor>
+        <StyledReviewAuthor>By: {review.username} on {moment(review.date).format('LL')}</StyledReviewAuthor>
       </header>
 
       <main>
