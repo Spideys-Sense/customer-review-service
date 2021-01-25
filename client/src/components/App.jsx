@@ -96,7 +96,7 @@ class App extends React.Component {
 
   hideWriteReviewModal() {
     this.setState({
-      showWriteReviewModal: false,
+      showReviewForm: false,
     })
   }
 

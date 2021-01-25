@@ -20,7 +20,7 @@ const StyledModalContent = styled.div`
   padding: 20px;
   border-radius: 4px;
   max-width: 700px;
-  height: 800px;
+  height: 600px;
   overflow: hidden;
   font-family: Roboto, serif;
 `;
@@ -38,9 +38,11 @@ const StyledInput = styled.input`
   ::placeholder {
     font-size: 12px;
   }
+  border: 1px solid #bdbdbd;
+  border-radius: 3px;
 `;
 
-const StyledTextArea = styled.textarea`
+const StyledTextArea1 = styled.textarea`
   font-family: Roboto, serif
   margin-bottom: 10px;
   resize: vertical;
@@ -50,6 +52,8 @@ const StyledTextArea = styled.textarea`
     font-size: 12px;
     font-family: Roboto, serif
   }
+  border: 1px solid #bdbdbd;
+  border-radius: 3px;
 `;
 
 const StyledPreviewButton = styled.button`
@@ -88,12 +92,41 @@ const CameraIcon = styled.svg`
 
 const StyledStarRatingDiv = styled.div`
   color: orange;
+  font-size: 35px;
 `;
 
 const StyledStarRatingSpan = styled.span`
   :hover {
     cursor: pointer;
   }
+`;
+
+const StyledExitModalX = styled.span`
+  font-family: Roboto, serif;
+  float: right;
+  font-size: 30px;
+  color: grey;
+`;
+
+const StyledAdditionalFeedback = styled.div`
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+const StyledTextArea2 = styled.textarea`
+  font-family: Roboto, serif
+  margin-bottom: 10px;
+  resize: vertical;
+  min-height: 100px;
+  max-height: 100px;
+  width: 99%;
+  ::placeholder {
+    font-size: 12px;
+    font-family: Roboto, serif
+  }
+  border: 1px solid #bdbdbd;
+  border-radius: 3px;
 `;
 
 class WriteReviewModal extends React.Component {
@@ -137,8 +170,9 @@ class WriteReviewModal extends React.Component {
       return (
         <StyledModal>
           <StyledModalContent>
-            <div style={{ 'font-size': '15px', 'padding-bottom': '10px' }}>Item Title</div>
-            <span style={{ 'font-size': '12px' }}>Rate this item:</span>
+            <span style={{ 'font-size': '15px', 'padding-bottom': '10px', 'font-weight': 'bold' }}>Item Title</span>
+            <StyledExitModalX onClick={this.props.hideModal}>X</StyledExitModalX>
+            <div style={{ 'font-size': '12px', 'margin-top': '12px' }}>Rate this item:</div>
             <span>
               <StyledStarRatingDiv>
                 <StyledStarRatingSpan onClick={this.setRating} id='1'>☆</StyledStarRatingSpan>
@@ -151,8 +185,13 @@ class WriteReviewModal extends React.Component {
             <StyledForm>
               <StyledInput type='text' placeholder='Nickname'></StyledInput>
               <StyledInput type='text' placeholder='Headline for your review'></StyledInput>
-              <StyledTextArea placeholder='Your Review'></StyledTextArea>
+              <StyledTextArea1 placeholder='Your Review'></StyledTextArea1>
             </StyledForm>
+            <div style={{'border': '1px solid #bdbdbd', 'border-radius': '3px', padding: '10px'}}>
+              <StyledAdditionalFeedback>Submit Additional Feedback to Customer Service</StyledAdditionalFeedback>
+              <StyledTextArea2 placeholder='Tell us more. This will not appear on the main site (Optional)' />
+            </div>
+            <div style={{position: 'absolute', bottom: '370px'}}>
             <StyledPreviewButton>Preview</StyledPreviewButton>
             <StyledAddPhotoButton>
               <CameraIcon viewBox="0 0 512 512">
@@ -160,6 +199,8 @@ class WriteReviewModal extends React.Component {
               </CameraIcon>
               ADD PHOTO
             </StyledAddPhotoButton>
+            </div>
+            <div style={{position: 'absolute', 'font-size': '11px', bottom: '340px', 'border-bottom': '1px dotted'}}>Terms and Conditions</div>
           </StyledModalContent>
         </StyledModal>
       )
