@@ -86,10 +86,50 @@ const CameraIcon = styled.svg`
     margin: -3px 8px 0 0;
 `;
 
+const StyledStarRatingDiv = styled.div`
+  color: orange;
+`;
+
+const StyledStarRatingSpan = styled.span`
+  :hover {
+    cursor: pointer;
+  }
+`;
+
 class WriteReviewModal extends React.Component {
   //showModal, hideModal, isVisible
   constructor(props) {
     super(props);
+
+    this.state = {
+      title: null,
+      username: null,
+      body: null,
+      date: null,
+      rating: null,
+      likes: null,
+      imageUrl: null,
+      rating: null,
+    }
+    this.setRating = this.setRating.bind(this);
+  }
+
+  setRating(event) {
+    let clickedElement = event.target;
+    let currElement = clickedElement;
+    let rating = event.target.id;
+    while (currElement) {
+      currElement.innerHTML = '★';
+      currElement = currElement.previousSibling;
+    }
+    currElement = clickedElement.nextSibling;
+    while(currElement) {
+      currElement.innerHTML = '☆';
+      currElement = currElement.nextSibling;
+    }
+    this.setState({
+      rating,
+    })
   }
 
   render() {
@@ -98,7 +138,16 @@ class WriteReviewModal extends React.Component {
         <StyledModal>
           <StyledModalContent>
             <div style={{ 'font-size': '15px', 'padding-bottom': '10px' }}>Item Title</div>
-            <span style={{ 'font-size': '12px' }}>Rate this item:</span><span>IMAGE</span>
+            <span style={{ 'font-size': '12px' }}>Rate this item:</span>
+            <span>
+              <StyledStarRatingDiv>
+                <StyledStarRatingSpan onClick={this.setRating} id='1'>☆</StyledStarRatingSpan>
+                <StyledStarRatingSpan onClick={this.setRating} id='2'>☆</StyledStarRatingSpan>
+                <StyledStarRatingSpan onClick={this.setRating} id='3'>☆</StyledStarRatingSpan>
+                <StyledStarRatingSpan onClick={this.setRating} id='4'>☆</StyledStarRatingSpan>
+                <StyledStarRatingSpan onClick={this.setRating} id='5'>☆</StyledStarRatingSpan>
+              </StyledStarRatingDiv>
+            </span>
             <StyledForm>
               <StyledInput type='text' placeholder='Nickname'></StyledInput>
               <StyledInput type='text' placeholder='Headline for your review'></StyledInput>
