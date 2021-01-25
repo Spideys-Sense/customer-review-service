@@ -130,7 +130,6 @@ const StyledTextArea2 = styled.textarea`
 `;
 
 class WriteReviewModal extends React.Component {
-  //showModal, hideModal, isVisible
   constructor(props) {
     super(props);
 
@@ -143,26 +142,26 @@ class WriteReviewModal extends React.Component {
       likes: null,
       imageUrl: null,
       rating: null,
-    }
+    };
     this.setRating = this.setRating.bind(this);
   }
 
   setRating(event) {
-    let clickedElement = event.target;
+    const clickedElement = event.target;
+    const rating = event.target.id;
     let currElement = clickedElement;
-    let rating = event.target.id;
     while (currElement) {
       currElement.innerHTML = '★';
       currElement = currElement.previousSibling;
     }
     currElement = clickedElement.nextSibling;
-    while(currElement) {
+    while (currElement) {
       currElement.innerHTML = '☆';
       currElement = currElement.nextSibling;
     }
     this.setState({
       rating,
-    })
+    });
   }
 
   render() {
@@ -183,27 +182,27 @@ class WriteReviewModal extends React.Component {
               </StyledStarRatingDiv>
             </span>
             <StyledForm>
-              <StyledInput type='text' placeholder='Nickname'></StyledInput>
-              <StyledInput type='text' placeholder='Headline for your review'></StyledInput>
-              <StyledTextArea1 placeholder='Your Review'></StyledTextArea1>
+              <StyledInput type="text" placeholder="Nickname" />
+              <StyledInput type="text" placeholder="Headline for your review" />
+              <StyledTextArea1 placeholder="Your Review" />
             </StyledForm>
-            <div style={{'border': '1px solid #bdbdbd', 'border-radius': '3px', padding: '10px'}}>
+            <div style={{ border: '1px solid #bdbdbd', 'border-radius': '3px', padding: '10px' }}>
               <StyledAdditionalFeedback>Submit Additional Feedback to Customer Service</StyledAdditionalFeedback>
-              <StyledTextArea2 placeholder='Tell us more. This will not appear on the main site (Optional)' />
+              <StyledTextArea2 placeholder="Tell us more. This will not appear on the main site (Optional)" />
             </div>
-            <div style={{position: 'absolute', bottom: '370px'}}>
-            <StyledPreviewButton>Preview</StyledPreviewButton>
-            <StyledAddPhotoButton>
-              <CameraIcon viewBox="0 0 512 512">
-                <path d="m441 88l-190 0-25-29-110 0-25 29-20 0c-33 0-59 26-59 59l0 241c0 33 26 60 59 60l370 0c33 0 59-27 59-60l0-239c0-33-26-61-59-61z m15 302c0 8-7 16-17 16l-368 0c-8 0-16-6-16-16l0-241c0-9 6-17 16-17l38 0 25-28 72 0 25 28 210 0c8 0 16 7 16 17l0 241z m-200-13c-58 0-104-47-104-104 0-58 46-105 104-105 58 0 104 47 104 105 0 57-46 104-104 104z m0-176c-40 0-71 32-71 72 0 39 31 71 71 71 40 0 71-32 71-71 0-40-31-72-71-72z m160-11c0-11-9-20-20-20-11 0-19 9-19 20 0 11 8 20 19 20 11 0 20-9 20-20z" />
-              </CameraIcon>
-              ADD PHOTO
-            </StyledAddPhotoButton>
+            <div style={{ position: 'absolute', bottom: '370px' }}>
+              <StyledPreviewButton>Preview</StyledPreviewButton>
+              <StyledAddPhotoButton>
+                <CameraIcon viewBox="0 0 512 512">
+                  <path d="m441 88l-190 0-25-29-110 0-25 29-20 0c-33 0-59 26-59 59l0 241c0 33 26 60 59 60l370 0c33 0 59-27 59-60l0-239c0-33-26-61-59-61z m15 302c0 8-7 16-17 16l-368 0c-8 0-16-6-16-16l0-241c0-9 6-17 16-17l38 0 25-28 72 0 25 28 210 0c8 0 16 7 16 17l0 241z m-200-13c-58 0-104-47-104-104 0-58 46-105 104-105 58 0 104 47 104 105 0 57-46 104-104 104z m0-176c-40 0-71 32-71 72 0 39 31 71 71 71 40 0 71-32 71-71 0-40-31-72-71-72z m160-11c0-11-9-20-20-20-11 0-19 9-19 20 0 11 8 20 19 20 11 0 20-9 20-20z" />
+                </CameraIcon>
+                ADD PHOTO
+              </StyledAddPhotoButton>
             </div>
-            <div style={{position: 'absolute', 'font-size': '11px', bottom: '340px', 'border-bottom': '1px dotted'}}>Terms and Conditions</div>
+            <div style={{ position: 'absolute', 'font-size': '11px', bottom: '340px', 'border-bottom': '1px dotted' }}>Terms and Conditions</div>
           </StyledModalContent>
         </StyledModal>
-      )
+      );
     } else {
       return <div />
     }

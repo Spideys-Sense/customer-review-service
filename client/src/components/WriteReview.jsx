@@ -36,7 +36,7 @@ const StyledCircle2 = styled.circle`
   cy: 60;
   r: 47;
   stroke-dasharray: 300;
-  stroke-dashoffset: calc(300 - (300 * ${props => props.rating}) / 100);
+  stroke-dashoffset: calc(300 - (300 * ${(props) => props.rating}) / 100);
 `;
 
 const CircleSVG = styled.svg`
@@ -104,24 +104,30 @@ const WriteReview = ({ reviews, showModal, percentRecommended }) => (
     <StyledRatingBox>
       <StyledPercentRecommended>
         <CircleSVG>
-          <StyledCircle1></StyledCircle1>
-          <StyledCircle2 rating={percentRecommended}></StyledCircle2>
+          <StyledCircle1 />
+          <StyledCircle2 rating={percentRecommended} />
         </CircleSVG>
         <StyledPercantage>
-          <h2 style={{ 'font-size': '35px', 'font-weight': 'normal'}}>{percentRecommended}<span style={{ 'font-size': '15px' }}> %</span></h2>
+          <h2 style={{ 'font-size': '35px', 'font-weight': 'normal' }}>
+            {percentRecommended}
+            <span style={{ 'font-size': '15px' }}> %</span>
+          </h2>
         </StyledPercantage>
         <StyledPercentageSubtext>
           RECOMMEND
         </StyledPercentageSubtext>
       </StyledPercentRecommended>
     </StyledRatingBox>
-    <div style={{'margin-top': '30px'}}>
+    <div style={{ 'margin-top': '30px' }}>
 
-    <div style={{'grid-column': '2', 'font-size': '11px', 'font-weight': 'bold', 'margin-bottom': '5px'}}>
-      <div >{percentRecommended}% OF REVIEWERS</div>
-      <div>RECOMMEND THIS PRODUCT</div>
-    </div>
-    <StyledWriteReviewButton onClick={showModal}>Write a Review</StyledWriteReviewButton>
+      <div style={{ 'grid-column': '2', 'font-size': '11px', 'font-weight': 'bold', 'margin-bottom': '5px' }}>
+        <div>
+          {percentRecommended}
+          % OF REVIEWERS
+        </div>
+        <div>RECOMMEND THIS PRODUCT</div>
+      </div>
+      <StyledWriteReviewButton onClick={showModal}>Write a Review</StyledWriteReviewButton>
     </div>
   </StyledWriteReview>
 )
