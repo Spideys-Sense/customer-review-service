@@ -16,7 +16,7 @@ app.get('/api/:id/reviews', (req, res) => {
   // Defining sorting metrics
   const itemId = req.params.id;
   let sortBy = req.query.sort_by;
-  let rating = (req.query.rating === '') ? [1, 2, 3, 4, 5] : req.query.rating;
+  let rating = (req.query.rating === '') ? [1, 2, 3, 4, 5] : (req.query.rating === '[4, 5]') ? [4, 5]: (req.query.rating === '[1, 2, 3]') ? [1, 2, 3] : req.query.rating;
 
   // Converts sortBy metric to sequelize syntax
   if (sortBy === 'newest') {
