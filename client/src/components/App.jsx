@@ -25,12 +25,13 @@ class App extends React.Component {
 
     this.state = {
       reviews: [],
+      currReviews: [],
+      photoReviews: [],
       averages: [],
       loadAll: false,
       showPhotos: false,
       showReviewForm: false,
       percentRecommended: null,
-      currReviews: [],
       filter: '',
       sortBy: 'newest',
     };
