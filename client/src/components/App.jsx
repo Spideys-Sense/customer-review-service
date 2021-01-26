@@ -118,7 +118,11 @@ class App extends React.Component {
 
   filterReviews(event) {
     event.preventDefault();
-    const filter = event.target.value;
+    let filter = event.target.value;
+    if (!filter) {
+      filter = event.target.innerHTML.slice(0, 1);
+    }
+
     this.setState({
       filter,
     }, () => {
@@ -156,6 +160,7 @@ class App extends React.Component {
             loadAllReviews={this.loadAllReviews}
             averages={this.state.averages}
             reviews={this.state.reviews}
+            filterReviews={this.filterReviews}
           />
           <WriteReview
             showModal={this.showWriteReviewModal}

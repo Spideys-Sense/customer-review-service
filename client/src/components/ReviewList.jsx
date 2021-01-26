@@ -75,7 +75,6 @@ class ReviewListHeader extends React.Component {
   }
 
   render() {
-    console.log(this.props.sortReviews)
     if (this.props.loadAll) {
       return (
         <StyledReviewListHeader>
@@ -134,7 +133,6 @@ const StyledLoadAllReviewsButton = styled.button`
 `;
 
 const ReviewList = ({ reviews, loadAll, loadAllReviews, filterReviews, sortReviews, filter, sortBy }) => {
-  console.log(sortReviews)
   if (loadAll) {
     return (
       <StyledReviewList>
