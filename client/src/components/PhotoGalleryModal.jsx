@@ -8,6 +8,7 @@ const StyledModal = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
+  z-index: 2;
   padding-top: 100px;
   background-color: rgba(0, 0, 0, 0.75);
   transition: all 0.3s linear;
@@ -38,6 +39,9 @@ const StyledExitModalX = styled.span`
   float: right;
   font-size: 30px;
   color: grey;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledPhotoModalTitle = styled.span`
@@ -70,7 +74,5 @@ const PhotoGalleryModal = ({isVisible, reviews, hideModal}) => {
     return <div />
   }
 }
-
-
 
 export default PhotoGalleryModal;

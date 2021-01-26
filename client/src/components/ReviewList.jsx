@@ -39,6 +39,9 @@ const StyledSelectMenu = styled.select`
   border-color: #c9c9c9;
   background-color: white;
   display: inline-block;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const FilterByDropDown = ({ filter, filterReviews }) => (

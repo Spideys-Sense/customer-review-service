@@ -38,6 +38,9 @@ const StyledStarGraphText = styled.div`
   color: #0E70BE;
   margin-top: 3px;
   margin-bottom: 3px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledStarImage = styled.div`

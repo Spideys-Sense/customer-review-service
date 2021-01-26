@@ -108,6 +108,9 @@ const StyledExitModalX = styled.span`
   float: right;
   font-size: 30px;
   color: grey;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledAdditionalFeedback = styled.div`
