@@ -7,6 +7,7 @@ import WriteReview from './WriteReview.jsx';
 import WriteReviewModal from './WriteReviewModal.jsx';
 import PhotoGallery from './PhotoGallery.jsx';
 import PhotoGalleryModal from './PhotoGalleryModal.jsx';
+import PhotoPreview from './PhotoPreview.jsx';
 
 const StyledApp = styled.div`
     display: grid;
@@ -27,6 +28,7 @@ class App extends React.Component {
       reviews: [],
       currReviews: [],
       photoReviews: [],
+      currReview: null,
       averages: [],
       loadAll: false,
       showPhotos: false,
@@ -46,12 +48,15 @@ class App extends React.Component {
     this.calcPercentRecommended = this.calcPercentRecommended.bind(this);
     this.sortReviews = this.sortReviews.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
+    this.getPhotoReviews = this.getPhotoReviews.bind(this);
+    this.setCurrPhoto = this.setCurrPhoto.bind(this);
   }
 
   componentDidMount() {
     // Gets all reviews on page load
     this.getAllReviews();
     this.getReviewAverages();
+    this.getPhotoReviews();
   }
 
   getAllReviews() {
@@ -154,6 +159,25 @@ class App extends React.Component {
     })
   }
 
+  getPhotoReviews() {
+    return axios.get(`/api/5/photoReviews`)
+        .then(({ data }) => {
+          this.setState({
+            photoReviews: data,
+          });
+        })
+        .catch((err) => console.error(err));
+  }
+
+  setCurrPhoto(id) {
+    return axios.get(`api/5/${id}`)
+      .then(({ data }) => {
+        this.setState({
+          currReview: data,
+        })
+      })
+  }
+
   render() {
     return (
       <div>
@@ -177,7 +201,7 @@ class App extends React.Component {
             filter={this.state.filter}
             sortBy={this.state.sortBy}
           />
-          <PhotoGallery reviews={this.state.reviews} showModal={this.showPhotosModal}/>
+          <PhotoGallery reviews={this.state.photoReviews} showModal={this.showPhotosModal}/>
         </StyledApp>
         <PhotoGalleryModal
           hideModal={this.hidePhotosModal}
@@ -188,6 +212,9 @@ class App extends React.Component {
           hideModal={this.hideWriteReviewModal}
           isVisible={this.state.showReviewForm}
         />
+        {/* <PhotoPreview
+          review={this.state.currReview}
+        /> */}
       </div>
     );
   }

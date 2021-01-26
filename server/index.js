@@ -5,6 +5,7 @@ const { Reviews, Items } = require('../database/Model');
 const path = require('path');
 const PORT = 1111;
 const Promise = require('bluebird');
+const { Op } = require('sequelize');
 
 // Displays client
 app.use(express.static(path.join(__dirname, '../client/public')))
@@ -77,6 +78,36 @@ app.get('/api/:id/reviewAverages', async (req, res) => {
   // Sent as: [averageRating, % of 1 star, % of 2 star...]
   res.send(allAverages);
 });
+
+app.get('/api/:id/photoReviews', (req, res) => {
+  const itemId = req.params.id;
+  return Reviews.findAll({
+    where: {
+      itemId,
+      imageUrl: {
+        [Op.ne]: null
+      }
+    }
+  })
+    .then((results) => {
+      res.send(results);
+    })
+});
+
+app.get('/api/:id/:review', (req, res) => {
+  console.log('THIS SHOULD LOG TO THE CONSOLE')
+  const itemId = req.params.id;
+  const reviewId = req.params.review;
+  return Reviews.findAll({
+    where: {
+      itemId,
+      id: reviewId,
+    }
+  })
+    .then((result) => {
+      res.send(result);
+    })
+})
 
 module.exports = app.listen(PORT, () => {
   console.log('Server listening on port: ' + PORT);

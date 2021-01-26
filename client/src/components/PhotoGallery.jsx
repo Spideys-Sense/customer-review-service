@@ -73,7 +73,7 @@ class PhotoGallery extends React.Component {
         </PhotoGalleryHeader>
         <StyledPhotoGrid>
           {this.props.reviews.slice(0, 8).map((review) => (
-            <StyledImage src={review.imageUrl} alt='failed to load' />
+            <StyledImage id={review.id} src={review.imageUrl} alt='failed to load' />
           ))}
         </StyledPhotoGrid>
       </StyledPhotoGallery>

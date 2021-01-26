@@ -48,7 +48,7 @@ const PhotoPreview = ({review}) => (
         <StyledExitModalX>X</StyledExitModalX>
       </div>
 
-      <img>IMAGE HERE</img>
+      {/* <img>IMAGE HERE</img> */}
 
       <div>
         REVIEWDATA
@@ -57,3 +57,5 @@ const PhotoPreview = ({review}) => (
     </StyledModalContent>
   </StyledModal>
 )
+
+export default PhotoPreview;
