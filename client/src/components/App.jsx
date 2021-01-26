@@ -119,7 +119,8 @@ class App extends React.Component {
   filterReviews(event) {
     event.preventDefault();
     let filter = event.target.value;
-    if (!filter) {
+    console.log(filter);
+    if (filter === undefined) {
       filter = event.target.innerHTML.slice(0, 1);
     }
 
