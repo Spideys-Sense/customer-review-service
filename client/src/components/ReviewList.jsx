@@ -35,7 +35,9 @@ const StyledSelectMenu = styled.select`
   margin-bottom: auto;
   margin-left: 10px;
   margin-right: 10px;
-  height: 60%;
+  height: 26px;
+  border-color: #c9c9c9;
+  background-color: white;
   display: inline-block;
 `;
 
@@ -52,7 +54,7 @@ const FilterByDropDown = ({ filter, filterReviews }) => (
   </StyledSelectMenu>
 );
 
-const SortByDropDown = ({ sortBy, sortReviews}) => (
+const SortByDropDown = ({ sortBy, sortReviews }) => (
   <StyledSelectMenu value={sortBy} onChange={sortReviews}>
     <option value="newest">Newest</option>
     <option value="oldest">Oldest</option>
@@ -81,11 +83,11 @@ class ReviewListHeader extends React.Component {
           <StyledSortMenus>
             <StyledDropDown>
               <p style={{ 'display': 'inline-block' }}>Filter by: </p>
-              <FilterByDropDown filterReviews={this.props.filterReviews} filter={this.props.filter}/>
+              <FilterByDropDown filterReviews={this.props.filterReviews} filter={this.props.filter} />
             </StyledDropDown>
             <StyledDropDown>
               <p style={{ 'display': 'inline-block' }}>Sort by: </p>
-              <SortByDropDown sortBy={this.props.sortBy} sortReviews={this.props.sortReviews}/>
+              <SortByDropDown sortBy={this.props.sortBy} sortReviews={this.props.sortReviews} />
             </StyledDropDown>
           </StyledSortMenus>
         </StyledReviewListHeader>
@@ -97,11 +99,11 @@ class ReviewListHeader extends React.Component {
           <StyledSortMenus>
             <StyledDropDown>
               <p style={{ 'display': 'inline-block' }}>Filter by: </p>
-              <FilterByDropDown filter={this.props.filter} filterReviews={this.props.filterReviews}/>
+              <FilterByDropDown filter={this.props.filter} filterReviews={this.props.filterReviews} />
             </StyledDropDown>
             <StyledDropDown>
               <p style={{ 'display': 'inline-block' }}>Sort by: </p>
-              <SortByDropDown sortBy={this.props.sortBy} sortReviews={this.props.sortReviews}/>
+              <SortByDropDown sortBy={this.props.sortBy} sortReviews={this.props.sortReviews} />
             </StyledDropDown>
           </StyledSortMenus>
         </StyledReviewListHeader>
@@ -109,9 +111,6 @@ class ReviewListHeader extends React.Component {
     }
   }
 }
-// const ReviewListHeader = ({ loadAll, reviewsLength, filterReviews }) => {
-//   console.log(filterReviews)
-// };
 
 const StyledReviewListTitle = styled.h4`
   margin-left: 2.5%;
