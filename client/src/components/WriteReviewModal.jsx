@@ -11,6 +11,7 @@ const StyledModal = styled.div`
   padding-top: 100px;
   background-color: rgba(0, 0, 0, 0.75);
   transition: all 0.3s linear;
+  z-index: 2;
 `;
 
 const StyledModalContent = styled.div`
@@ -23,6 +24,7 @@ const StyledModalContent = styled.div`
   height: 600px;
   overflow: hidden;
   font-family: Roboto, serif;
+  z-index: 2;
 `;
 
 const StyledForm = styled.form`

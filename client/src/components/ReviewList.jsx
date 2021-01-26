@@ -39,21 +39,21 @@ const StyledSelectMenu = styled.select`
   display: inline-block;
 `;
 
-const FilterByDropDown = () => (
-  <StyledSelectMenu>
-    <option value={[1, 2, 3, 4, 5]}>All stars</option>
-    <option value={5}>5 stars only</option>
-    <option value={4}>4 stars only</option>
-    <option value={3}>3 stars only</option>
-    <option value={2}>2 stars only</option>
-    <option value={1}>1 stars only</option>
-    <option value={[4, 5]}>All positive</option>
-    <option value={[1, 2, 3]}>All critical</option>
+const FilterByDropDown = ({ filter, filterReviews }) => (
+  <StyledSelectMenu value={filter} onChange={filterReviews}>
+    <option value={''}>All stars</option>
+    <option value={'5'}>5 stars only</option>
+    <option value={'4'}>4 stars only</option>
+    <option value={'3'}>3 stars only</option>
+    <option value={'2'}>2 stars only</option>
+    <option value={'1'}>1 stars only</option>
+    <option value={'[4, 5]'}>All positive</option>
+    <option value={'[1, 2, 3]'}>All critical</option>
   </StyledSelectMenu>
 );
 
-const SortByDropDown = () => (
-  <StyledSelectMenu>
+const SortByDropDown = ({ sortBy, sortReviews}) => (
+  <StyledSelectMenu value={sortBy} onChange={sortReviews}>
     <option value="newest">Newest</option>
     <option value="oldest">Oldest</option>
     <option value="highest_rating">Highest rating</option>
@@ -67,41 +67,51 @@ const StyledSortMenus = styled.div`
   margin-right: auto;
 `;
 
-const ReviewListHeader = ({ loadAll, reviewsLength }) => {
-  if (loadAll) {
-    return (
-      <StyledReviewListHeader>
-        <p>Showing All Reviews</p>
-        <StyledSortMenus>
-          <StyledDropDown>
-            <p style={{ 'display': 'inline-block' }}>Filter by: </p>
-            <FilterByDropDown />
-          </StyledDropDown>
-          <StyledDropDown>
-            <p style={{ 'display': 'inline-block' }}>Sort by: </p>
-            <SortByDropDown />
-          </StyledDropDown>
-        </StyledSortMenus>
-      </StyledReviewListHeader>
-    );
-  } else {
-    return (
-      <StyledReviewListHeader>
-        <p>Showing 1-5 of {reviewsLength} Reviews</p>
-        <StyledSortMenus>
-          <StyledDropDown>
-            <p style={{ 'display': 'inline-block' }}>Filter by: </p>
-            <FilterByDropDown />
-          </StyledDropDown>
-          <StyledDropDown>
-            <p style={{ 'display': 'inline-block' }}>Sort by: </p>
-            <SortByDropDown />
-          </StyledDropDown>
-        </StyledSortMenus>
-      </StyledReviewListHeader>
-    );
+class ReviewListHeader extends React.Component {
+  constructor(props) {
+    super(props);
   }
-};
+
+  render() {
+    console.log(this.props.sortReviews)
+    if (this.props.loadAll) {
+      return (
+        <StyledReviewListHeader>
+          <p>Showing All Reviews</p>
+          <StyledSortMenus>
+            <StyledDropDown>
+              <p style={{ 'display': 'inline-block' }}>Filter by: </p>
+              <FilterByDropDown filterReviews={this.props.filterReviews} filter={this.props.filter}/>
+            </StyledDropDown>
+            <StyledDropDown>
+              <p style={{ 'display': 'inline-block' }}>Sort by: </p>
+              <SortByDropDown sortBy={this.props.sortBy} sortReviews={this.props.sortReviews}/>
+            </StyledDropDown>
+          </StyledSortMenus>
+        </StyledReviewListHeader>
+      );
+    } else {
+      return (
+        <StyledReviewListHeader>
+          <p>Showing 1-5 of {this.props.reviewsLength} Reviews</p>
+          <StyledSortMenus>
+            <StyledDropDown>
+              <p style={{ 'display': 'inline-block' }}>Filter by: </p>
+              <FilterByDropDown filter={this.props.filter} filterReviews={this.props.filterReviews}/>
+            </StyledDropDown>
+            <StyledDropDown>
+              <p style={{ 'display': 'inline-block' }}>Sort by: </p>
+              <SortByDropDown sortBy={this.props.sortBy} sortReviews={this.props.sortReviews}/>
+            </StyledDropDown>
+          </StyledSortMenus>
+        </StyledReviewListHeader>
+      );
+    }
+  }
+}
+// const ReviewListHeader = ({ loadAll, reviewsLength, filterReviews }) => {
+//   console.log(filterReviews)
+// };
 
 const StyledReviewListTitle = styled.h4`
   margin-left: 2.5%;
@@ -115,14 +125,24 @@ const StyledLine = styled.hr`
   margin-right: auto;
 `;
 
-const ReviewList = ({ reviews, loadAll, loadAllReviews }) => {
+const StyledLoadAllReviewsButton = styled.button`
+  height: 40px;
+  width: 210px;
+  border: 1px solid #163977;
+  color: #163977;
+  border-radius: 4px;
+  font-size: 15px;
+`;
+
+const ReviewList = ({ reviews, loadAll, loadAllReviews, filterReviews, sortReviews, filter, sortBy }) => {
+  console.log(sortReviews)
   if (loadAll) {
     return (
       <StyledReviewList>
         <header>
           <StyledReviewListTitle>{reviews.length} Reviews</StyledReviewListTitle>
           <StyledLine />
-          <ReviewListHeader reviewsLength={reviews.length} loadAll={loadAll} />
+          <ReviewListHeader reviewsLength={reviews.length} loadAll={loadAll} filterReviews={filterReviews} sortReviews={sortReviews} filter={filter} sortBy={sortBy} />
           <StyledLine />
         </header>
 
@@ -152,7 +172,7 @@ const ReviewList = ({ reviews, loadAll, loadAllReviews }) => {
         <header>
           <StyledReviewListTitle>{reviews.length} Reviews</StyledReviewListTitle>
           <StyledLine></StyledLine>
-          <ReviewListHeader loadAll={loadAll} />
+          <ReviewListHeader reviewsLength={reviews.length} loadAll={loadAll} filterReviews={filterReviews} sortReviews={sortReviews} filter={filter} sortBy={sortBy} />
           <StyledLine></StyledLine>
         </header>
 
@@ -164,7 +184,7 @@ const ReviewList = ({ reviews, loadAll, loadAllReviews }) => {
             </div>
           ))}
         </main>
-        <button onClick={loadAllReviews}>Load More</button>
+        <StyledLoadAllReviewsButton onClick={loadAllReviews}>Read All {reviews.length} reviews</StyledLoadAllReviewsButton>
       </StyledReviewList>
     );
   }

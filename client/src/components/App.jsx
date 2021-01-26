@@ -30,6 +30,9 @@ class App extends React.Component {
       showPhotos: false,
       showReviewForm: false,
       percentRecommended: null,
+      currReviews: [],
+      filter: '',
+      sortBy: 'newest',
     };
 
     this.loadAllReviews = this.loadAllReviews.bind(this);
@@ -40,6 +43,8 @@ class App extends React.Component {
     this.showWriteReviewModal = this.showWriteReviewModal.bind(this);
     this.hideWriteReviewModal = this.hideWriteReviewModal.bind(this);
     this.calcPercentRecommended = this.calcPercentRecommended.bind(this);
+    this.sortReviews = this.sortReviews.bind(this);
+    this.filterReviews = this.filterReviews.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +58,7 @@ class App extends React.Component {
       .then(({ data }) => {
         this.setState({
           reviews: data,
+          currReviews: data,
         });
       })
       .catch((err) => console.error(err));
@@ -110,6 +116,38 @@ class App extends React.Component {
     });
   }
 
+  filterReviews(event) {
+    event.preventDefault();
+    const filter = event.target.value;
+    this.setState({
+      filter,
+    }, () => {
+      return axios.get(`/api/5/reviews/?sort_by=${this.state.sortBy}&rating=${this.state.filter}`)
+        .then(({ data }) => {
+          this.setState({
+            currReviews: data,
+          });
+        })
+        .catch((err) => console.error(err));
+    })
+  }
+
+  sortReviews(event) {
+    event.preventDefault();
+    const sortBy = event.target.value;
+    this.setState({
+      sortBy,
+    }, () => {
+      return axios.get(`/api/5/reviews/?sort_by=${this.state.sortBy}&rating=${this.state.filter}`)
+        .then(({ data }) => {
+          this.setState({
+            currReviews: data,
+          });
+        })
+        .catch((err) => console.error(err));
+    })
+  }
+
   render() {
     return (
       <div>
@@ -126,7 +164,11 @@ class App extends React.Component {
           <ReviewList
             loadAllReviews={this.loadAllReviews}
             loadAll={this.state.loadAll}
-            reviews={this.state.reviews}
+            reviews={this.state.currReviews}
+            filterReviews={this.filterReviews}
+            sortReviews={this.sortReviews}
+            filter={this.state.filter}
+            sortBy={this.state.sortBy}
           />
           <PhotoGallery reviews={this.state.reviews} showModal={this.showPhotosModal}/>
         </StyledApp>

@@ -13,7 +13,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Retrieves/sends all reviews that match search criteria
 app.get('/api/:id/reviews', (req, res) => {
-
   // Defining sorting metrics
   const itemId = req.params.id;
   let sortBy = req.query.sort_by;
