@@ -36,8 +36,9 @@ const StyledReviewTitle = styled.div`
   font-size: 90%;
   display: flex;
   flex-direction: row;
-  margin-bottom: -3%;
-  height: 50px;
+  margin-bottom: -2%;
+  margin-top: 20px;
+  height: 30px;
 `;
 
 const StyledStarImage = styled.div`
@@ -97,7 +98,7 @@ const ReviewListEntry = ({ review }) => {
             </StyledEmptyStarImage>
           </StyledStarRating>
 
-          <h4><b>{review.title}</b></h4>
+          <h4 style={{margin: '0px', 'margin-left': '5px'}}><b>{review.title}</b></h4>
         </StyledReviewTitle>
 
         <StyledReviewAuthor>By: {review.username} on {moment(review.date).format('LL')}</StyledReviewAuthor>
@@ -106,8 +107,8 @@ const ReviewListEntry = ({ review }) => {
       <main>
         <StyledReviewBody>{review.body}</StyledReviewBody>
         <img style={{
-          'width': '70px',
-          'height': 'auto'
+          'width': '60px',
+          'height': '60px'
         }} src={review.imageUrl} alt='failed to load' />
       </main>
 
