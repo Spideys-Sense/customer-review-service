@@ -32,8 +32,37 @@ const StyledExitModalX = styled.span`
   float: right;
   font-size: 30px;
   color: grey;
+  margin-left: 20px;
   :hover {
     cursor: pointer;
+  }
+`;
+
+const StyledAllPhotosButton = styled.button`
+  height: 35px;
+  width: 110px;
+  border: 1px solid #163977;
+  border-radius: 3px;
+  color: #163977;
+  font-size: 14px;
+  :hover {
+    cursor: pointer;
+    background: #e6e6fd
+  }
+`;
+
+const StyledContinueButton = styled.button`
+  height: 35px;
+  width: 130px;
+  border: 1px solid #d4d4d4;
+  border-radius: 3px;
+  color: #0E70BE;
+  font-size: 14px;
+  float: right;
+  margin-left: 3px;
+  :hover {
+    cursor: pointer;
+    border: 2px solid #0E70BE;
   }
 `;
 
@@ -43,17 +72,17 @@ const PhotoPreview = ({review, isVisible, hideModal}) => {
   <StyledModal>
     <StyledModalContent>
       <div>
-        <button>All Photos</button>
+        <StyledAllPhotosButton>All Photos</StyledAllPhotosButton>
 
-        <button>Prev </button>
-        <button>Next ></button>
         <StyledExitModalX onClick={hideModal}>X</StyledExitModalX>
+        <StyledContinueButton>Next ></StyledContinueButton>
+        <StyledContinueButton>Prev </StyledContinueButton>
       </div>
 
       {/* <img>IMAGE HERE</img> */}
 
       <div>
-        REVIEWDATA
+        <img src={review.imageUrl} />
       </div>
 
     </StyledModalContent>

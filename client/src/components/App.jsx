@@ -176,7 +176,7 @@ class App extends React.Component {
     return axios.get(`api/5/${id}`)
       .then(({ data }) => {
         this.setState({
-          currReview: data,
+          currReview: data[0],
           showPhotos: false,
           showReview: true,
       })
