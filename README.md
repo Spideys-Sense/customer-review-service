@@ -39,28 +39,36 @@ npm install
 
 ## Endpoints
 
-1. '/api/:id/reviews'
+# '/api/:id/reviews'
 
 Query Parameters:
+:id - Number (item id)
 sortBy - String (defines sort metric)
 rating - String (defines star rating to filter by)
 
 Returns:
 Array of objects consisting of all reviews that match sort/filter metrics
 
-2. '/api/:id/reviewAverages'
+# '/api/:id/reviewAverages'
+
+Query Parameters:
+:id - Number (item id)
 
 Returns:
 Array consisting of average ratings and % distribution of star ratings ([averageRating, % of 1 star, % of 2 star...])
 
-3. '/api/:id/photoReviews'
+# '/api/:id/photoReviews'
+
+Query Parameters:
+:id - Number (item id)
 
 Returns:
 Array consisting of all reviews with photos
 
-4. '/api/:id/:review'
+# '/api/:id/:review'
 
 Query Parameters:
+:id - Number (item id)
 :review - Number (id of the review)
 
 Returns:
