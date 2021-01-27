@@ -32,6 +32,9 @@ const StyledImage = styled.img`
   margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledExitModalX = styled.span`
@@ -51,7 +54,7 @@ const StyledPhotoModalTitle = styled.span`
   font-weight: bold;
 `;
 
-const PhotoGalleryModal = ({isVisible, reviews, hideModal}) => {
+const PhotoGalleryModal = ({isVisible, reviews, hideModal, setCurrPhoto}) => {
   if (isVisible) {
     return (
       <div style={{display: 'block'}}>
@@ -64,7 +67,7 @@ const PhotoGalleryModal = ({isVisible, reviews, hideModal}) => {
             <br/>
             <br/>
             {reviews.map((review) => (
-              <StyledImage src={review.imageUrl} alt='failed to load' />
+              <StyledImage onClick={setCurrPhoto} id={review.id} src={review.imageUrl} alt='failed to load' />
             ))}
           </StyledModalContent>
         </StyledModal>

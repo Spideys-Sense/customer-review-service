@@ -33,6 +33,7 @@ class App extends React.Component {
       loadAll: false,
       showPhotos: false,
       showReviewForm: false,
+      showReview: false,
       percentRecommended: null,
       filter: '',
       sortBy: 'newest',
@@ -50,6 +51,7 @@ class App extends React.Component {
     this.filterReviews = this.filterReviews.bind(this);
     this.getPhotoReviews = this.getPhotoReviews.bind(this);
     this.setCurrPhoto = this.setCurrPhoto.bind(this);
+    this.hideReviewModal = this.hideReviewModal.bind(this);
   }
 
   componentDidMount() {
@@ -167,15 +169,24 @@ class App extends React.Component {
           });
         })
         .catch((err) => console.error(err));
-  }
+      }
 
-  setCurrPhoto(id) {
+  setCurrPhoto(event) {
+    const id = event.target.id;
     return axios.get(`api/5/${id}`)
       .then(({ data }) => {
         this.setState({
           currReview: data,
-        })
+          showPhotos: false,
+          showReview: true,
       })
+    })
+  }
+
+  hideReviewModal() {
+    this.setState({
+      showReview: false,
+    })
   }
 
   render() {
@@ -201,20 +212,27 @@ class App extends React.Component {
             filter={this.state.filter}
             sortBy={this.state.sortBy}
           />
-          <PhotoGallery reviews={this.state.photoReviews} showModal={this.showPhotosModal}/>
+          <PhotoGallery
+            reviews={this.state.photoReviews}
+            showModal={this.showPhotosModal}
+            setCurrPhoto={this.setCurrPhoto}
+          />
         </StyledApp>
         <PhotoGalleryModal
           hideModal={this.hidePhotosModal}
           isVisible={this.state.showPhotos}
           reviews={this.state.reviews}
+          setCurrPhoto={this.setCurrPhoto}
         />
         <WriteReviewModal
           hideModal={this.hideWriteReviewModal}
           isVisible={this.state.showReviewForm}
         />
-        {/* <PhotoPreview
+        <PhotoPreview
           review={this.state.currReview}
-        /> */}
+          isVisible={this.state.showReview}
+          hideModal={this.hideReviewModal}
+        />
       </div>
     );
   }

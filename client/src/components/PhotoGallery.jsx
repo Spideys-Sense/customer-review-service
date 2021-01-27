@@ -47,6 +47,9 @@ const StyledImage = styled.img`
   margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const PhotoGalleryHeader = styled.div`
@@ -73,7 +76,7 @@ class PhotoGallery extends React.Component {
         </PhotoGalleryHeader>
         <StyledPhotoGrid>
           {this.props.reviews.slice(0, 8).map((review) => (
-            <StyledImage id={review.id} src={review.imageUrl} alt='failed to load' />
+            <StyledImage onClick={this.props.setCurrPhoto} id={review.id} src={review.imageUrl} alt='failed to load' />
           ))}
         </StyledPhotoGrid>
       </StyledPhotoGallery>

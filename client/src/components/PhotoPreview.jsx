@@ -37,7 +37,9 @@ const StyledExitModalX = styled.span`
   }
 `;
 
-const PhotoPreview = ({review}) => (
+const PhotoPreview = ({review, isVisible, hideModal}) => {
+  if (isVisible) {
+    return (
   <StyledModal>
     <StyledModalContent>
       <div>
@@ -45,7 +47,7 @@ const PhotoPreview = ({review}) => (
 
         <button>Prev </button>
         <button>Next ></button>
-        <StyledExitModalX>X</StyledExitModalX>
+        <StyledExitModalX onClick={hideModal}>X</StyledExitModalX>
       </div>
 
       {/* <img>IMAGE HERE</img> */}
@@ -56,6 +58,11 @@ const PhotoPreview = ({review}) => (
 
     </StyledModalContent>
   </StyledModal>
-)
+    )
+  } else {
+    return <div />
+  }
+}
+
 
 export default PhotoPreview;
