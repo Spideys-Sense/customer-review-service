@@ -1,13 +1,12 @@
 # Project Name
 
-> Project description
+> Bitey is a fun chewy.com clone made by Spidey's Sense
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/Spideys-Sense/product-display-service
+  - https://github.com/Spideys-Sense/item-description-service
+  - https://github.com/Spideys-Sense/proxy-server-eusanio
 
 ## Table of Contents
 
