@@ -132,7 +132,7 @@ const StyledLikeButton = styled.button`
   text-align: center;
   box-sizing: border-box;
   height: 35px;
-  width: 80px;
+  width: 90px;
   :hover {
     cursor: pointer;
     border: 1px solid #0E70BE;

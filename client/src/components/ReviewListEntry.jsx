@@ -31,6 +31,17 @@ const StyledLikeButton = styled.button`
   }
 `;
 
+const StyledClickedLikeButton = styled.button`
+  background-color: #0E70BE;
+  color: white;
+  border: 1px solid #0E70BE;
+  border-radius: 4px;
+  text-align: center;
+  box-sizing: border-box;
+  height: 35px;
+  width: 90px;
+`;
+
 const StyledReviewTitle = styled.div`
   font-weight: bold;
   font-size: 90%;
@@ -70,8 +81,33 @@ const StyledStarRating = styled.span`
   margin: 0px;
   position: relative;
   padding: 0;
-  /* text-shadow: 0px 1px 0 #a2a2a2; */
 `;
+
+class LikeButton extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      clicked: false,
+    }
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({
+      clicked: true,
+    })
+  }
+
+  render() {
+    if (this.state.clicked) {
+      return <StyledClickedLikeButton>Liked!</StyledClickedLikeButton>
+    } else {
+      return <StyledLikeButton onClick={this.handleClick}>{this.props.likes} likes</StyledLikeButton>
+    }
+  }
+}
 
 const ReviewListEntry = ({ review }) => {
   const starsUrl = `https://www.chewy.com/assets/img/ratings/rating-${review.rating}_0.svg`;
@@ -113,7 +149,7 @@ const ReviewListEntry = ({ review }) => {
       </main>
 
       <footer style={{ 'margin-top': '7px' }}>
-        <StyledLikeButton><b>{review.likes} likes</b></StyledLikeButton>
+        <LikeButton likes={review.likes}></LikeButton>
         <span style={{ 'color': 'grey', 'border-bottom': '1px dotted', 'font-size': '11px', 'margin-left': '10px' }}>Report</span>
       </footer>
     </StyledListEntry>
