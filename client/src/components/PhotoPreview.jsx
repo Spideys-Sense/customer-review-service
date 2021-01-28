@@ -132,7 +132,7 @@ const StyledLikeButton = styled.button`
   text-align: center;
   box-sizing: border-box;
   height: 35px;
-  width: 60px;
+  width: 80px;
   :hover {
     cursor: pointer;
     border: 1px solid #0E70BE;
@@ -151,34 +151,15 @@ const StyledClickedLikeButton = styled.button`
   width: 90px;
 `;
 
-class LikeButton extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      clicked: false,
-    }
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    let currState = this.state.clicked;
-    this.setState({
-      clicked: !currState,
-    })
-  }
-
-  render() {
-    if (this.state.clicked) {
-      return <StyledClickedLikeButton></StyledClickedLikeButton>
-    } else {
-      return <StyledLikeButton onClick={this.handleClick}>LIKE</StyledLikeButton>
-    }
+const LikeButton = ({ clicked, handleClick, likes }) => {
+  if (clicked) {
+    return <StyledClickedLikeButton>Liked!</StyledClickedLikeButton>
+  } else {
+    return <StyledLikeButton onClick={handleClick}>{likes} likes</StyledLikeButton>
   }
 }
 
-const PhotoPreview = ({ review, isVisible, hideModal, changeReview }) => {
+const PhotoPreview = ({ isVisible, hideModal, changeReview, review, setToClicked, clicked}) => {
   if (isVisible) {
     return (
       <StyledModal>
@@ -193,7 +174,7 @@ const PhotoPreview = ({ review, isVisible, hideModal, changeReview }) => {
 
           <div style={{ display: 'flex', 'flex-direction': 'row' }}>
             <StyledReviewModalImage src={review.imageUrl} />
-            <span style={{ 'margin-left': '10px', position:'relative' }}>
+            <span style={{ 'margin-left': '10px', position: 'relative' }}>
               <StyledReviewTitle>
                 <StyledStarRating>
                   <StyledStarImage rating={review.rating}>
@@ -220,10 +201,10 @@ const PhotoPreview = ({ review, isVisible, hideModal, changeReview }) => {
               <StyledReviewBody>
                 {review.body}
               </StyledReviewBody>
-              <div style={{position:'absolute', bottom: '0'}}>
+              <div style={{ position: 'absolute', bottom: '0' }}>
 
-              <LikeButton>LIKE</LikeButton>
-              <span style={{'margin-left':'150px'}}>Report</span>
+                <LikeButton handleClick={setToClicked} clicked={clicked} likes={review.likes}>LIKE</LikeButton>
+                <span style={{ 'color': 'grey', 'border-bottom': '1px dotted', 'font-size': '11px', 'margin-left': '150px' }}>Report</span>
               </div>
             </span>
           </div>

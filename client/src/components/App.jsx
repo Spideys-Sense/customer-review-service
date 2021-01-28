@@ -37,6 +37,7 @@ class App extends React.Component {
       percentRecommended: null,
       filter: '',
       sortBy: 'newest',
+      clicked: false,
     };
 
     this.loadAllReviews = this.loadAllReviews.bind(this);
@@ -53,6 +54,7 @@ class App extends React.Component {
     this.setCurrPhoto = this.setCurrPhoto.bind(this);
     this.hideReviewModal = this.hideReviewModal.bind(this);
     this.selectNextPhoto = this.selectNextPhoto.bind(this);
+    this.setToClicked = this.setToClicked.bind(this);
   }
 
   componentDidMount() {
@@ -192,23 +194,33 @@ class App extends React.Component {
       if (index < photoReviews.length - 1) {
         this.setState({
           currReview: photoReviews[index + 1],
+          clicked: false,
         })
       } else {
         this.setState({
           currReview: photoReviews[0],
+          clicked: false,
         })
       }
     } else {
       if (index > 0) {
         this.setState({
           currReview: photoReviews[index - 1],
+          clicked: false,
         })
       } else {
         this.setState({
           currReview: photoReviews[photoReviews.length - 1],
+          clicked: false,
         })
       }
     }
+  }
+
+  setToClicked() {
+    this.setState({
+      clicked: true,
+    })
   }
 
   hideReviewModal() {
@@ -261,6 +273,8 @@ class App extends React.Component {
           isVisible={this.state.showReview}
           hideModal={this.hideReviewModal}
           changeReview={this.selectNextPhoto}
+          clicked={this.state.clicked}
+          setToClicked={this.setToClicked}
         />
       </div>
     );
