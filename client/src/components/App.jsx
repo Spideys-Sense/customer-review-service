@@ -52,6 +52,7 @@ class App extends React.Component {
     this.getPhotoReviews = this.getPhotoReviews.bind(this);
     this.setCurrPhoto = this.setCurrPhoto.bind(this);
     this.hideReviewModal = this.hideReviewModal.bind(this);
+    this.selectNextPhoto = this.selectNextPhoto.bind(this);
   }
 
   componentDidMount() {
@@ -183,6 +184,33 @@ class App extends React.Component {
     })
   }
 
+  selectNextPhoto(event) {
+    const photoReviews = this.state.photoReviews;
+    const index = photoReviews.indexOf(this.state.currReview);
+
+    if (event.target.innerHTML === 'Next >') {
+      if (index < photoReviews.length - 1) {
+        this.setState({
+          currReview: photoReviews[index + 1],
+        })
+      } else {
+        this.setState({
+          currReview: photoReviews[0],
+        })
+      }
+    } else {
+      if (index > 0) {
+        this.setState({
+          currReview: photoReviews[index - 1],
+        })
+      } else {
+        this.setState({
+          currReview: photoReviews[photoReviews.length - 1],
+        })
+      }
+    }
+  }
+
   hideReviewModal() {
     this.setState({
       showReview: false,
@@ -232,6 +260,7 @@ class App extends React.Component {
           review={this.state.currReview}
           isVisible={this.state.showReview}
           hideModal={this.hideReviewModal}
+          changeReview={this.selectNextPhoto}
         />
       </div>
     );

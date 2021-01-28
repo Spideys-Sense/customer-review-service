@@ -6,11 +6,16 @@ const path = require('path');
 const PORT = 1111;
 const Promise = require('bluebird');
 const { Op } = require('sequelize');
+const cors = require('cors');
 
 // Displays client
 app.use(express.static(path.join(__dirname, '../client/public')))
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors({
+  origin: 'http://localhost:1111',
+}));
 
 // Retrieves/sends all reviews that match search criteria
 app.get('/api/:id/reviews', (req, res) => {
@@ -95,7 +100,6 @@ app.get('/api/:id/photoReviews', (req, res) => {
 });
 
 app.get('/api/:id/:review', (req, res) => {
-  console.log('THIS SHOULD LOG TO THE CONSOLE')
   const itemId = req.params.id;
   const reviewId = req.params.review;
   return Reviews.findAll({
