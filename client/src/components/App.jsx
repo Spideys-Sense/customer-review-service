@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReviewAverage from './ReviewAverage.jsx';
 import ReviewList from './ReviewList.jsx';
 import WriteReview from './WriteReview.jsx';
+import WriteReviewModal from './WriteReviewModal.jsx';
 import PhotoGallery from './PhotoGallery.jsx';
 import PhotoGalleryModal from './PhotoGalleryModal.jsx';
 
@@ -27,6 +28,8 @@ class App extends React.Component {
       averages: [],
       loadAll: false,
       showPhotos: false,
+      showReviewForm: false,
+      percentRecommended: null,
     };
 
     this.loadAllReviews = this.loadAllReviews.bind(this);
@@ -36,6 +39,7 @@ class App extends React.Component {
     this.hidePhotosModal = this.hidePhotosModal.bind(this);
     this.showWriteReviewModal = this.showWriteReviewModal.bind(this);
     this.hideWriteReviewModal = this.hideWriteReviewModal.bind(this);
+    this.calcPercentRecommended = this.calcPercentRecommended.bind(this);
   }
 
   componentDidMount() {
@@ -59,7 +63,7 @@ class App extends React.Component {
       .then(({ data }) => {
         this.setState({
           averages: data,
-        });
+        }, this.calcPercentRecommended);
       })
       .catch((err) => console.error(err));
   }
@@ -75,13 +79,35 @@ class App extends React.Component {
   showPhotosModal() {
     this.setState({
       showPhotos: true,
-    })
+    });
   }
 
   hidePhotosModal() {
     this.setState({
       showPhotos: false,
-    })
+    });
+  }
+
+  showWriteReviewModal() {
+    this.setState({
+      showReviewForm: true,
+    });
+  }
+
+  hideWriteReviewModal() {
+    this.setState({
+      showReviewForm: false,
+    });
+  }
+
+  calcPercentRecommended() {
+    const percent = (
+      parseInt(this.state.averages[3].slice(0, -1))
+      + parseInt(this.state.averages[4].slice(0, -1))
+      + parseInt(this.state.averages[5].slice(0, -1)));
+    this.setState({
+      percentRecommended: percent,
+    });
   }
 
   showWriteReviewModal() {
@@ -102,8 +128,8 @@ class App extends React.Component {
             reviews={this.state.reviews}
           />
           <WriteReview
-            hideModal={this.hideWriteReviewModal}
             showModal={this.showWriteReviewModal}
+            percentRecommended={this.state.percentRecommended}
           />
           <ReviewList
             loadAllReviews={this.loadAllReviews}
@@ -116,6 +142,10 @@ class App extends React.Component {
           hideModal={this.hidePhotosModal}
           isVisible={this.state.showPhotos}
           reviews={this.state.reviews}
+        />
+        <WriteReviewModal
+          hideModal={this.hideWriteReviewModal}
+          isVisible={this.state.showReviewForm}
         />
       </div>
     );
