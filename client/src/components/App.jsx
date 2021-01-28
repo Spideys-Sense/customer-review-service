@@ -110,6 +110,14 @@ class App extends React.Component {
     });
   }
 
+  showWriteReviewModal() {
+
+  }
+
+  hideWriteReviewModal() {
+
+  }
+
   render() {
     return (
       <div>

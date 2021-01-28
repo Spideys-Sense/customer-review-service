@@ -27,10 +27,7 @@ const StyledImage = styled.img`
   width: 60px;
   height: 60px;
   align-content: center;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 5px;
 `;
 
 const StyledExitModalX = styled.span`
@@ -47,30 +44,26 @@ const StyledPhotoModalTitle = styled.span`
   font-weight: bold;
 `;
 
-const PhotoGalleryModal = ({isVisible, reviews, hideModal}) => {
+const PhotoGalleryModal = ({ isVisible, reviews, hideModal }) => {
   if (isVisible) {
     return (
-      <div style={{display: 'block'}}>
+      <div style={{ display: 'block' }}>
         <StyledModal>
           <StyledModalContent>
-            <StyledPhotoModalTitle>Customer Photos ({reviews.length})</StyledPhotoModalTitle>
-            <StyledExitModalX onClick={hideModal}>X</StyledExitModalX>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <div style={{ 'margin-bottom': '70px' }}>
+              <StyledPhotoModalTitle>Customer Photos ({reviews.length})</StyledPhotoModalTitle>
+              <StyledExitModalX onClick={hideModal}>X</StyledExitModalX>
+            </div>
             {reviews.map((review) => (
-              <StyledImage src={review.imageUrl} alt='failed to load' />
+              <StyledImage src={review.imageUrl} alt='Customer Review Image' />
             ))}
           </StyledModalContent>
         </StyledModal>
       </div>
-    )
+    );
   } else {
     return <div />
   }
-}
-
-
+};
 
 export default PhotoGalleryModal;
