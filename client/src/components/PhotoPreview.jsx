@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const StyledModal = styled.div`
   display: block;
@@ -153,13 +154,20 @@ const StyledClickedLikeButton = styled.button`
 
 const LikeButton = ({ clicked, handleClick, likes }) => {
   if (clicked) {
-    return <StyledClickedLikeButton>Liked!</StyledClickedLikeButton>
-  } else {
-    return <StyledLikeButton onClick={handleClick}>{likes} likes</StyledLikeButton>
+    return <StyledClickedLikeButton>Liked!</StyledClickedLikeButton>;
   }
-}
+  return (
+    <StyledLikeButton onClick={handleClick}>
+      {likes}
+      {' '}
+      likes
+    </StyledLikeButton>
+  );
+};
 
-const PhotoPreview = ({ isVisible, hideModal, changeReview, review, setToClicked, clicked}) => {
+const PhotoPreview = ({
+  isVisible, hideModal, changeReview, review, setToClicked, clicked,
+}) => {
   if (isVisible) {
     return (
       <StyledModal>
@@ -168,7 +176,10 @@ const PhotoPreview = ({ isVisible, hideModal, changeReview, review, setToClicked
             <StyledAllPhotosButton>All Photos</StyledAllPhotosButton>
 
             <StyledExitModalX onClick={hideModal}>X</StyledExitModalX>
-            <StyledContinueButton onClick={changeReview}>Next ></StyledContinueButton>
+            <StyledContinueButton onClick={changeReview}>
+              Next
+              {' >'}
+            </StyledContinueButton>
             <StyledContinueButton onClick={changeReview}>Prev </StyledContinueButton>
           </div>
 
@@ -196,26 +207,58 @@ const PhotoPreview = ({ isVisible, hideModal, changeReview, review, setToClicked
                 <h4 style={{ margin: '0px', 'margin-left': '5px' }}><b>{review.title}</b></h4>
               </StyledReviewTitle>
 
-              <StyledReviewAuthor>By: {review.username} on {moment(review.date).format('LL')}</StyledReviewAuthor>
+              <StyledReviewAuthor>
+                By:
+                {' '}
+                {review.username}
+                {' '}
+                on
+                {' '}
+                {moment(review.date).format('LL')}
+              </StyledReviewAuthor>
 
               <StyledReviewBody>
                 {review.body}
               </StyledReviewBody>
               <div style={{ position: 'absolute', bottom: '0' }}>
 
-                <LikeButton handleClick={setToClicked} clicked={clicked} likes={review.likes}>LIKE</LikeButton>
-                <span style={{ 'color': 'grey', 'border-bottom': '1px dotted', 'font-size': '11px', 'margin-left': '150px' }}>Report</span>
+                <LikeButton
+                  handleClick={setToClicked}
+                  clicked={clicked}
+                  likes={review.likes}
+                >
+                  LIKE
+                </LikeButton>
+                <span style={{
+                  color: 'grey', 'border-bottom': '1px dotted', 'font-size': '11px', 'margin-left': '150px',
+                }}
+                >
+                  Report
+                </span>
               </div>
             </span>
           </div>
 
         </StyledModalContent>
       </StyledModal>
-    )
-  } else {
-    return <div />
+    );
   }
-}
+  return <div />;
+};
 
+PhotoPreview.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  hideModal: PropTypes.func.isRequired,
+  changeReview: PropTypes.func.isRequired,
+  review: PropTypes.objectOf.isRequired,
+  setToClicked: PropTypes.func.isRequired,
+  clicked: PropTypes.bool.isRequired,
+};
+
+LikeButton.propTypes = {
+  clicked: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  likes: PropTypes.number.isRequired,
+};
 
 export default PhotoPreview;

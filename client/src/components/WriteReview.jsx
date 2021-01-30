@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledWriteReview = styled.div`
   grid-row: 1;
@@ -99,7 +100,7 @@ const StyledWriteReviewButton = styled.button`
   }
 `;
 
-const WriteReview = ({ reviews, showModal, percentRecommended }) => (
+const WriteReview = ({ showModal, percentRecommended }) => (
   <StyledWriteReview>
     <StyledRatingBox>
       <StyledPercentRecommended>
@@ -120,7 +121,10 @@ const WriteReview = ({ reviews, showModal, percentRecommended }) => (
     </StyledRatingBox>
     <div style={{ 'margin-top': '30px' }}>
 
-      <div style={{ 'grid-column': '2', 'font-size': '11px', 'font-weight': 'bold', 'margin-bottom': '5px' }}>
+      <div style={{
+        'grid-column': '2', 'font-size': '11px', 'font-weight': 'bold', 'margin-bottom': '5px',
+      }}
+      >
         <div>
           {percentRecommended}
           % OF REVIEWERS
@@ -130,6 +134,11 @@ const WriteReview = ({ reviews, showModal, percentRecommended }) => (
       <StyledWriteReviewButton onClick={showModal}>Write a Review</StyledWriteReviewButton>
     </div>
   </StyledWriteReview>
-)
+);
+
+WriteReview.propTypes = {
+  showModal: PropTypes.func.isRequired,
+  percentRecommended: PropTypes.number.isRequired,
+};
 
 export default WriteReview;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledModal = styled.div`
   display: block;
@@ -54,28 +55,45 @@ const StyledPhotoModalTitle = styled.span`
   font-weight: bold;
 `;
 
-const PhotoGalleryModal = ({isVisible, reviews, hideModal, setCurrPhoto}) => {
+const PhotoGalleryModal = ({
+  isVisible, reviews, hideModal, setCurrPhoto,
+}) => {
   if (isVisible) {
     return (
-      <div style={{display: 'block'}}>
+      <div style={{
+        display: 'block',
+      }}
+      >
         <StyledModal>
           <StyledModalContent>
-            <StyledPhotoModalTitle>Customer Photos ({reviews.length})</StyledPhotoModalTitle>
-            <StyledExitModalX onClick={hideModal}>X</StyledExitModalX>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <div style={{
+              'margin-bottom': '60px',
+            }}
+            >
+              <StyledPhotoModalTitle>
+                Customer Photos
+                {' ('}
+                {reviews.length}
+                {')'}
+              </StyledPhotoModalTitle>
+              <StyledExitModalX onClick={hideModal}>X</StyledExitModalX>
+            </div>
             {reviews.map((review) => (
-              <StyledImage onClick={setCurrPhoto} id={review.id} src={review.imageUrl} alt='failed to load' />
+              <StyledImage onClick={setCurrPhoto} id={review.id} src={review.imageUrl} alt="" />
             ))}
           </StyledModalContent>
         </StyledModal>
       </div>
-    )
-  } else {
-    return <div />
+    );
   }
-}
+  return <div />;
+};
+
+PhotoGalleryModal.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+  hideModal: PropTypes.func.isRequired,
+  setCurrPhoto: PropTypes.func.isRequired,
+};
 
 export default PhotoGalleryModal;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const StyledListEntry = styled.li`
   font-family: Roboto, serif;
@@ -89,7 +90,7 @@ class LikeButton extends React.Component {
 
     this.state = {
       clicked: false,
-    }
+    };
 
     this.handleClick = this.handleClick.bind(this);
   }
@@ -97,63 +98,90 @@ class LikeButton extends React.Component {
   handleClick() {
     this.setState({
       clicked: true,
-    })
+    });
   }
 
   render() {
-    if (this.state.clicked) {
-      return <StyledClickedLikeButton>Liked!</StyledClickedLikeButton>
-    } else {
-      return <StyledLikeButton onClick={this.handleClick}>{this.props.likes} likes</StyledLikeButton>
+    const { clicked } = this.state;
+    const { likes } = this.props;
+    if (clicked) {
+      return <StyledClickedLikeButton>Liked!</StyledClickedLikeButton>;
     }
+    return (
+      <StyledLikeButton onClick={this.handleClick}>
+        {likes}
+        {' '}
+        likes
+      </StyledLikeButton>
+    );
   }
 }
 
-const ReviewListEntry = ({ review }) => {
-  const starsUrl = `https://www.chewy.com/assets/img/ratings/rating-${review.rating}_0.svg`;
+const ReviewListEntry = ({ review }) => (
+  <StyledListEntry>
+    <header>
+      <StyledReviewTitle>
+        <StyledStarRating>
+          <StyledStarImage rating={review.rating}>
+            <span>★</span>
+            <span>★</span>
+            <span>★</span>
+            <span>★</span>
+            <span>★</span>
+          </StyledStarImage>
+          <StyledEmptyStarImage>
+            <span>☆</span>
+            <span>☆</span>
+            <span>☆</span>
+            <span>☆</span>
+            <span>☆</span>
+          </StyledEmptyStarImage>
+        </StyledStarRating>
 
-  return (
-    <StyledListEntry>
-      <header>
-        <StyledReviewTitle>
-          {/* <img style={{ 'margin-right': '10px' }} src={starsUrl} alt={review.rating + '  stars'} /> */}
-          <StyledStarRating>
-            <StyledStarImage rating={review.rating}>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-            </StyledStarImage>
-            <StyledEmptyStarImage>
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-            </StyledEmptyStarImage>
-          </StyledStarRating>
+        <h4 style={{ margin: '0px', 'margin-left': '5px' }}><b>{review.title}</b></h4>
+      </StyledReviewTitle>
 
-          <h4 style={{margin: '0px', 'margin-left': '5px'}}><b>{review.title}</b></h4>
-        </StyledReviewTitle>
+      <StyledReviewAuthor>
+        By:
+        {' '}
+        {review.username}
+        {' '}
+        on
+        {' '}
+        {moment(review.date).format('LL')}
+      </StyledReviewAuthor>
+    </header>
 
-        <StyledReviewAuthor>By: {review.username} on {moment(review.date).format('LL')}</StyledReviewAuthor>
-      </header>
+    <main>
+      <StyledReviewBody>{review.body}</StyledReviewBody>
+      <img
+        style={{
+          width: '60px',
+          height: '60px',
+        }}
+        src={review.imageUrl}
+        alt=""
+      />
+    </main>
 
-      <main>
-        <StyledReviewBody>{review.body}</StyledReviewBody>
-        <img style={{
-          'width': '60px',
-          'height': '60px'
-        }} src={review.imageUrl} alt='failed to load' />
-      </main>
+    <footer style={{ 'margin-top': '7px' }}>
+      <LikeButton likes={review.likes} />
+      <span style={{
+        color: 'grey', 'border-bottom': '1px dotted', 'font-size': '11px', 'margin-left': '10px',
+      }}
+      >
+        Report
+      </span>
+    </footer>
+  </StyledListEntry>
+);
 
-      <footer style={{ 'margin-top': '7px' }}>
-        <LikeButton likes={review.likes}></LikeButton>
-        <span style={{ 'color': 'grey', 'border-bottom': '1px dotted', 'font-size': '11px', 'margin-left': '10px' }}>Report</span>
-      </footer>
-    </StyledListEntry>
-  );
+ReviewListEntry.propTypes = {
+  review: PropTypes.objectOf.isRequired,
+};
+
+LikeButton.propTypes = {
+  likes: PropTypes.number.isRequired,
 };
 
 export default ReviewListEntry;

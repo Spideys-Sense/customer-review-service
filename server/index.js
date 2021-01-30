@@ -9,7 +9,7 @@ const { Op } = require('sequelize');
 const cors = require('cors');
 
 // Displays client
-app.use(express.static(path.join(__dirname, '../client/public')))
+app.use(express.static(path.join(__dirname, '../client/public')));
 
 app.use(express.urlencoded({ extended: true }));
 
