@@ -78,3 +78,24 @@ Query Parameters:
 
 Returns:
 An object; the review with the matching id
+
+## Database Schema
+
+
+Items table:
+{
+  "id": Number (Primary key)
+}
+
+reviews table:
+  {
+  "id": Number (Primary key)
+  "itemId" : Number (foreign key referencing item ID)
+	“title”: String,
+	“username”: String,
+	“body”: String,
+	“date”: Date,
+	“rating”: Number,
+	“likes”: Number,
+	“imageUrl”: String
+  }
