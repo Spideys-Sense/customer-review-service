@@ -7,6 +7,7 @@ import WriteReview from './WriteReview.jsx';
 import WriteReviewModal from './WriteReviewModal.jsx';
 import PhotoGallery from './PhotoGallery.jsx';
 import PhotoGalleryModal from './PhotoGalleryModal.jsx';
+import PhotoPreview from './PhotoPreview.jsx';
 
 const StyledApp = styled.div`
     display: grid;
@@ -25,11 +26,18 @@ class App extends React.Component {
 
     this.state = {
       reviews: [],
+      currReviews: [],
+      photoReviews: [],
+      currReview: null,
       averages: [],
       loadAll: false,
       showPhotos: false,
       showReviewForm: false,
+      showReview: false,
       percentRecommended: null,
+      filter: '',
+      sortBy: 'newest',
+      clicked: false,
     };
 
     this.loadAllReviews = this.loadAllReviews.bind(this);
@@ -40,12 +48,20 @@ class App extends React.Component {
     this.showWriteReviewModal = this.showWriteReviewModal.bind(this);
     this.hideWriteReviewModal = this.hideWriteReviewModal.bind(this);
     this.calcPercentRecommended = this.calcPercentRecommended.bind(this);
+    this.sortReviews = this.sortReviews.bind(this);
+    this.filterReviews = this.filterReviews.bind(this);
+    this.getPhotoReviews = this.getPhotoReviews.bind(this);
+    this.setCurrPhoto = this.setCurrPhoto.bind(this);
+    this.hideReviewModal = this.hideReviewModal.bind(this);
+    this.selectNextPhoto = this.selectNextPhoto.bind(this);
+    this.setToClicked = this.setToClicked.bind(this);
   }
 
   componentDidMount() {
     // Gets all reviews on page load
     this.getAllReviews();
     this.getReviewAverages();
+    this.getPhotoReviews();
   }
 
   getAllReviews() {
@@ -53,6 +69,7 @@ class App extends React.Component {
       .then(({ data }) => {
         this.setState({
           reviews: data,
+          currReviews: data,
         });
       })
       .catch((err) => console.error(err));
@@ -68,24 +85,32 @@ class App extends React.Component {
       .catch((err) => console.error(err));
   }
 
-  loadAllReviews() {
-    if (!this.state.loadAll) {
-      this.setState({
-        loadAll: true,
+  getPhotoReviews() {
+    return axios.get('/api/5/photoReviews')
+      .then(({ data }) => {
+        this.setState({
+          photoReviews: data,
+        });
+      })
+      .catch((err) => console.error(err));
+  }
+
+  setToClicked() {
+    this.setState({
+      clicked: true,
+    });
+  }
+
+  setCurrPhoto(event) {
+    const id = event.target.id;
+    return axios.get(`api/5/${id}`)
+      .then(({ data }) => {
+        this.setState({
+          currReview: data[0],
+          showPhotos: false,
+          showReview: true,
+        });
       });
-    }
-  }
-
-  showPhotosModal() {
-    this.setState({
-      showPhotos: true,
-    });
-  }
-
-  hidePhotosModal() {
-    this.setState({
-      showPhotos: false,
-    });
   }
 
   showWriteReviewModal() {
@@ -110,42 +135,163 @@ class App extends React.Component {
     });
   }
 
-  showWriteReviewModal() {
+  filterReviews(event) {
+    event.preventDefault();
+    let filter = event.target.value;
+    if (filter === undefined) {
+      filter = event.target.innerHTML.slice(0, 1);
+    }
 
+    this.setState({
+      filter,
+    }, () => {
+      return axios.get(`/api/5/reviews/?sort_by=${this.state.sortBy}&rating=${this.state.filter}`)
+        .then(({ data }) => {
+          this.setState({
+            currReviews: data,
+          });
+        })
+        .catch((err) => console.error(err));
+    });
   }
 
-  hideWriteReviewModal() {
+  sortReviews(event) {
+    const { sortBy, filter } = this.state;
+    event.preventDefault();
+    const sort_by = event.target.value;
+    this.setState({
+      sortBy: sort_by,
+    }, () => (
+      axios.get(`/api/5/reviews/?sort_by=${sortBy}&rating=${filter}`)
+        .then(({ data }) => {
+          this.setState({
+            currReviews: data,
+          });
+        })
+        .catch((err) => console.error(err))
+    ));
+  }
+
+  hidePhotosModal() {
+    this.setState({
+      showPhotos: false,
+    });
+  }
+
+  selectNextPhoto(event) {
+    const { photoReviews, currReview } = this.state;
+    const index = photoReviews.indexOf(currReview);
+
+    if (event.target.innerHTML === 'Next >') {
+      if (index < photoReviews.length - 1) {
+        this.setState({
+          currReview: photoReviews[index + 1],
+          clicked: false,
+        });
+      } else {
+        this.setState({
+          currReview: photoReviews[0],
+          clicked: false,
+        });
+      }
+    } else {
+      if (index > 0) {
+        this.setState({
+          currReview: photoReviews[index - 1],
+          clicked: false,
+        });
+      } else {
+        this.setState({
+          currReview: photoReviews[photoReviews.length - 1],
+          clicked: false,
+        });
+      }
+    }
+  }
+
+  showPhotosModal() {
+    this.setState({
+      showPhotos: true,
+    });
+  }
+
+  loadAllReviews() {
+    const { loadAll } = this.state;
+    if (!loadAll) {
+      this.setState({
+        loadAll: true,
+      });
+    }
+  }
+
+  hideReviewModal() {
+    this.setState({
+      showReview: false,
+    });
 
   }
 
   render() {
+    const {
+      reviews,
+      currReviews,
+      photoReviews,
+      currReview,
+      averages,
+      loadAll,
+      showPhotos,
+      showReviewForm,
+      showReview,
+      percentRecommended,
+      filter,
+      sortBy,
+      clicked,
+    } = this.state;
     return (
       <div>
         <StyledApp>
           <ReviewAverage
             loadAllReviews={this.loadAllReviews}
-            averages={this.state.averages}
-            reviews={this.state.reviews}
+            averages={averages}
+            reviews={reviews}
+            filterReviews={this.filterReviews}
           />
           <WriteReview
             showModal={this.showWriteReviewModal}
-            percentRecommended={this.state.percentRecommended}
+            percentRecommended={percentRecommended}
           />
           <ReviewList
             loadAllReviews={this.loadAllReviews}
-            loadAll={this.state.loadAll}
-            reviews={this.state.reviews}
+            loadAll={loadAll}
+            reviews={currReviews}
+            filterReviews={this.filterReviews}
+            sortReviews={this.sortReviews}
+            filter={filter}
+            sortBy={sortBy}
           />
-          <PhotoGallery reviews={this.state.reviews} showModal={this.showPhotosModal}/>
+          <PhotoGallery
+            reviews={photoReviews}
+            showModal={this.showPhotosModal}
+            setCurrPhoto={this.setCurrPhoto}
+          />
         </StyledApp>
         <PhotoGalleryModal
           hideModal={this.hidePhotosModal}
-          isVisible={this.state.showPhotos}
-          reviews={this.state.reviews}
+          isVisible={showPhotos}
+          reviews={reviews}
+          setCurrPhoto={this.setCurrPhoto}
         />
         <WriteReviewModal
           hideModal={this.hideWriteReviewModal}
-          isVisible={this.state.showReviewForm}
+          isVisible={showReviewForm}
+        />
+        <PhotoPreview
+          review={currReview}
+          isVisible={showReview}
+          hideModal={this.hideReviewModal}
+          changeReview={this.selectNextPhoto}
+          clicked={clicked}
+          setToClicked={this.setToClicked}
         />
       </div>
     );

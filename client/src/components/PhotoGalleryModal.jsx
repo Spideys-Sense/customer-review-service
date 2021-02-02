@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledModal = styled.div`
   display: block;
@@ -8,6 +9,7 @@ const StyledModal = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
+  z-index: 2;
   padding-top: 100px;
   background-color: rgba(0, 0, 0, 0.75);
   transition: all 0.3s linear;
@@ -27,7 +29,13 @@ const StyledImage = styled.img`
   width: 60px;
   height: 60px;
   align-content: center;
-  margin: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledExitModalX = styled.span`
@@ -35,6 +43,9 @@ const StyledExitModalX = styled.span`
   float: right;
   font-size: 30px;
   color: grey;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledPhotoModalTitle = styled.span`
@@ -44,26 +55,45 @@ const StyledPhotoModalTitle = styled.span`
   font-weight: bold;
 `;
 
-const PhotoGalleryModal = ({ isVisible, reviews, hideModal }) => {
+const PhotoGalleryModal = ({
+  isVisible, reviews, hideModal, setCurrPhoto,
+}) => {
   if (isVisible) {
     return (
-      <div style={{ display: 'block' }}>
+      <div style={{
+        display: 'block',
+      }}
+      >
         <StyledModal>
           <StyledModalContent>
-            <div style={{ 'margin-bottom': '70px' }}>
-              <StyledPhotoModalTitle>Customer Photos ({reviews.length})</StyledPhotoModalTitle>
+            <div style={{
+              'margin-bottom': '60px',
+            }}
+            >
+              <StyledPhotoModalTitle>
+                Customer Photos
+                {' ('}
+                {reviews.length}
+                {')'}
+              </StyledPhotoModalTitle>
               <StyledExitModalX onClick={hideModal}>X</StyledExitModalX>
             </div>
             {reviews.map((review) => (
-              <StyledImage src={review.imageUrl} alt='Customer Review Image' />
+              <StyledImage onClick={setCurrPhoto} id={review.id} src={review.imageUrl} alt="" />
             ))}
           </StyledModalContent>
         </StyledModal>
       </div>
     );
-  } else {
-    return <div />
   }
+  return <div />;
+};
+
+PhotoGalleryModal.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+  hideModal: PropTypes.func.isRequired,
+  setCurrPhoto: PropTypes.func.isRequired,
 };
 
 export default PhotoGalleryModal;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledModal = styled.div`
   display: block;
@@ -11,6 +12,7 @@ const StyledModal = styled.div`
   padding-top: 100px;
   background-color: rgba(0, 0, 0, 0.75);
   transition: all 0.3s linear;
+  z-index: 2;
 `;
 
 const StyledModalContent = styled.div`
@@ -23,6 +25,7 @@ const StyledModalContent = styled.div`
   height: 600px;
   overflow: hidden;
   font-family: Roboto, serif;
+  z-index: 2;
 `;
 
 const StyledForm = styled.form`
@@ -106,6 +109,9 @@ const StyledExitModalX = styled.span`
   float: right;
   font-size: 30px;
   color: grey;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledAdditionalFeedback = styled.div`
@@ -165,20 +171,21 @@ class WriteReviewModal extends React.Component {
   }
 
   render() {
-    if (this.props.isVisible) {
+    const { isVisible, hideModal } = this.props;
+    if (isVisible) {
       return (
         <StyledModal>
           <StyledModalContent>
             <span style={{ 'font-size': '15px', 'padding-bottom': '10px', 'font-weight': 'bold' }}>Item Title</span>
-            <StyledExitModalX onClick={this.props.hideModal}>X</StyledExitModalX>
+            <StyledExitModalX onClick={hideModal}>X</StyledExitModalX>
             <div style={{ 'font-size': '12px', 'margin-top': '12px' }}>Rate this item:</div>
             <span>
               <StyledStarRatingDiv>
-                <StyledStarRatingSpan onClick={this.setRating} id='1'>☆</StyledStarRatingSpan>
-                <StyledStarRatingSpan onClick={this.setRating} id='2'>☆</StyledStarRatingSpan>
-                <StyledStarRatingSpan onClick={this.setRating} id='3'>☆</StyledStarRatingSpan>
-                <StyledStarRatingSpan onClick={this.setRating} id='4'>☆</StyledStarRatingSpan>
-                <StyledStarRatingSpan onClick={this.setRating} id='5'>☆</StyledStarRatingSpan>
+                <StyledStarRatingSpan onClick={this.setRating} id="1">☆</StyledStarRatingSpan>
+                <StyledStarRatingSpan onClick={this.setRating} id="2">☆</StyledStarRatingSpan>
+                <StyledStarRatingSpan onClick={this.setRating} id="3">☆</StyledStarRatingSpan>
+                <StyledStarRatingSpan onClick={this.setRating} id="4">☆</StyledStarRatingSpan>
+                <StyledStarRatingSpan onClick={this.setRating} id="5">☆</StyledStarRatingSpan>
               </StyledStarRatingDiv>
             </span>
             <StyledForm>
@@ -187,7 +194,9 @@ class WriteReviewModal extends React.Component {
               <StyledTextArea1 placeholder="Your Review" />
             </StyledForm>
             <div style={{ border: '1px solid #bdbdbd', 'border-radius': '3px', padding: '10px' }}>
-              <StyledAdditionalFeedback>Submit Additional Feedback to Customer Service</StyledAdditionalFeedback>
+              <StyledAdditionalFeedback>
+                Submit Additional Feedback to Customer Service
+              </StyledAdditionalFeedback>
               <StyledTextArea2 placeholder="Tell us more. This will not appear on the main site (Optional)" />
             </div>
             <div style={{ position: 'absolute', bottom: '370px' }}>
@@ -199,14 +208,23 @@ class WriteReviewModal extends React.Component {
                 ADD PHOTO
               </StyledAddPhotoButton>
             </div>
-            <div style={{ position: 'absolute', 'font-size': '11px', bottom: '340px', 'border-bottom': '1px dotted' }}>Terms and Conditions</div>
+            <div style={{
+              position: 'absolute', 'font-size': '11px', bottom: '340px', 'border-bottom': '1px dotted',
+            }}
+            >
+              Terms and Conditions
+            </div>
           </StyledModalContent>
         </StyledModal>
       );
-    } else {
-      return <div />
     }
+    return <div />;
   }
 }
+
+WriteReviewModal.propTypes = {
+  isVisible: PropTypes.bool.isRequired,
+  hideModal: PropTypes.func.isRequired,
+};
 
 export default WriteReviewModal;

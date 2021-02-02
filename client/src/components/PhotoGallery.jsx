@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import PhotoGalleryModal from './PhotoGalleryModal.jsx';
 
 const StyledPhotoGallery = styled.div`
@@ -48,6 +49,9 @@ const StyledImage = styled.img`
   margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const PhotoGalleryHeader = styled.div`
@@ -55,18 +59,24 @@ const PhotoGalleryHeader = styled.div`
   max-height: 100px;
 `;
 
-const PhotoGallery = (props) => (
+const PhotoGallery = ({ showModal, setCurrPhoto, reviews }) => (
   <StyledPhotoGallery>
     <PhotoGalleryHeader>
       <StyledCustomerPhotosTitle>Customer Photos</StyledCustomerPhotosTitle>
-      <StyledSeeAllPhotos onClick={props.showModal}>See All Photos</StyledSeeAllPhotos>
+      <StyledSeeAllPhotos onClick={showModal}>See All Photos</StyledSeeAllPhotos>
     </PhotoGalleryHeader>
     <StyledPhotoGrid>
-      {props.reviews.slice(0, 8).map((review) => (
-        <StyledImage src={review.imageUrl} alt='failed to load' />
+      {reviews.slice(0, 8).map((review) => (
+        <StyledImage onClick={setCurrPhoto} id={review.id} src={review.imageUrl} alt="" />
       ))}
     </StyledPhotoGrid>
   </StyledPhotoGallery>
 );
+
+PhotoGallery.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  setCurrPhoto: PropTypes.func.isRequired,
+  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default PhotoGallery;
