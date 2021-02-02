@@ -6,6 +6,7 @@ import PhotoGalleryModal from './PhotoGalleryModal.jsx';
 const StyledPhotoGallery = styled.div`
   grid-row: 2;
   grid-column: 6 / -1;
+
   margin-bottom: 1100px;
 `;
 

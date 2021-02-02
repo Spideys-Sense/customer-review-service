@@ -228,6 +228,7 @@ class App extends React.Component {
     this.setState({
       showReview: false,
     });
+
   }
 
   render() {
