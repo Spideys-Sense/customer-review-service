@@ -16,14 +16,20 @@
 
 ## Usage
 
-> Some usage instructions
+> This module allows users to:
+
+- filter/sort through reviews
+- open a write review modal
+- open a photo gallery modal
+- open a review modal
 
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- etc
+- npm
+- MySQL 5.7.32
 
 ## Development
 
@@ -32,8 +38,8 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 From within the root directory:
 
 ```sh
-npm install -g webpack
 npm install
+npm run build
 ```
 
 ## Endpoints
